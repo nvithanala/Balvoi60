@@ -1,0 +1,9 @@
+storage/episodes/
+storage/cache/
+storage/logs/
+storage/.pipeline.lock
+.env
+__pycache__/
+*.pyc
+_xlsx_dump.txt
+_spec_extract.txt
