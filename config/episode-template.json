@@ -1,0 +1,43 @@
+{
+  "targetDurationMinutes": 30,
+  "maxDurationMinutes": 30,
+  "targetEpisodeSeconds": 1680,
+  "maxEpisodeSeconds": 1800,
+  "wordsPerMinute": 150,
+  "storyBlocks": 3,
+  "targetLoudnessLufs": -16,
+  "truePeakDbTp": -1,
+  "outputFormats": {
+    "podcast": { "codec": "mp3", "bitrateKbps": 128, "sampleRateHz": 44100, "channels": 2 },
+    "youtube": { "codec": "aac", "bitrateKbps": 192, "container": "mp4" }
+  },
+  "introTemplate": {
+    "baseTextKey": "welcome",
+    "dynamicSuffix": "It's {time} in {city} on the {day} of {month} {year}. I'm {anchorName} and here are our latest stories for the {editionName}."
+  },
+  "segmentOrder": [
+    { "id": 1, "type": "intro", "durationSec": 15, "source": "reusable_plus_dynamic_tts" },
+    { "id": 2, "type": "headlines", "durationSec": "45-60", "source": "bedrock_primers_tts" },
+    { "id": 3, "type": "transition_in", "durationSec": 5, "source": "reusable_rotating", "sheet": "Started", "variants": 10 },
+    { "id": 4, "type": "story_segment_1", "durationSec": "480-540", "source": "bedrock_rewrite_tts" },
+    { "id": 5, "type": "ad_transition_out_1", "durationSec": 5, "source": "reusable_rotating", "sheet": "Right Back", "variants": 10 },
+    { "id": 6, "type": "ad_1", "durationSec": "30-60", "source": "prerendered_mp3", "sheet": "Ad 1", "variants": 3 },
+    { "id": 7, "type": "return_to_news_1", "durationSec": 5, "source": "reusable_rotating", "sheet": "Welcome Back", "variants": 10 },
+    { "id": 8, "type": "story_segment_2", "durationSec": "480-540", "source": "bedrock_rewrite_tts" },
+    { "id": 9, "type": "ad_transition_out_2", "durationSec": 5, "source": "reusable_rotating", "sheet": "Right Back", "variants": 10 },
+    { "id": 10, "type": "ad_2", "durationSec": "30-60", "source": "prerendered_mp3", "sheet": "Ad 2", "variants": 3 },
+    { "id": 11, "type": "return_to_news_2", "durationSec": 5, "source": "reusable_rotating", "sheet": "Welcome Back", "variants": 10 },
+    { "id": 12, "type": "story_segment_3", "durationSec": "480-540", "source": "bedrock_rewrite_tts" },
+    { "id": 13, "type": "outro", "durationSec": 15, "source": "reusable_rotating", "sheet": "Thank You", "variants": 10 }
+  ],
+  "aiPipeline": {
+    "provider": "amazon_bedrock",
+    "fallbackProvider": "openai",
+    "tasks": ["newscaster_rewrite", "story_primer_15s", "cultural_translation"]
+  },
+  "tts": {
+    "provider": "elevenlabs",
+    "modelId": "eleven_multilingual_v2",
+    "voiceSelection": "time_shift_primary_from_editions_json"
+  }
+}

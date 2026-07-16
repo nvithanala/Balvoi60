@@ -1,0 +1,67 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "balvoi30"
+version = "0.1.0"
+description = "Automated multilingual news podcast pipeline and publisher"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "requests>=2.31.0",
+    "openpyxl>=3.1.0",
+    "python-dotenv>=1.0.0",
+    "openai>=1.30.0",
+    "boto3>=1.34.0",
+    "tzdata>=2024.1",
+    "flask>=3.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.4",
+]
+
+[project.scripts]
+balvoi-pipeline = "pipeline.run:main"
+balvoi-server = "server.app:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["balvoi*", "pipeline*", "server*"]
+
+[tool.setuptools.package-data]
+server = ["templates/*", "static/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-ra"
+markers = [
+    "integration: tests that require network, API keys, or ffmpeg",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+exclude = [
+    ".git",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".venv",
+    "storage",
+    "venv",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"pipeline/run.py" = ["E402"]
+"server/app.py" = ["E402"]
+
+[tool.ruff.format]
+quote-style = "double"

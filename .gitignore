@@ -1,9 +1,73 @@
-storage/episodes/
-storage/cache/
-storage/logs/
-storage/.pipeline.lock
+﻿# Secrets / environment
 .env
+.env.local
+*.env
+!.env.example
+server/.env
+
+# Python
 __pycache__/
-*.pyc
-_xlsx_dump.txt
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Generated pipeline output + runtime state (keep folders via .gitkeep)
+storage/cache/
+storage/episodes/*
+storage/manifests/*
+storage/articles/*
+!storage/episodes/.gitkeep
+!storage/manifests/.gitkeep
+!storage/articles/.gitkeep
+
+# Binary audio assets (bumpers / ad reads) -- YOUR CALL
+Arabic/
+English/
+French/
+German/
+Portuguese/
+Russian/
+Spanish/
+Turkish/
+
+# Binary planning/content docs -- YOUR CALL
+*.pptx
+*.docx
+*.xlsx
+
+# Scratch / dump files
 _spec_extract.txt
+_xlsx_dump.txt
+script_dump.txt
+pipeline.zip
+inspect_script.py
+inspect_selected.py
+
+# Leftover frontend deps (Python-only now)
+web/
+node_modules/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~
+
+# Lock + logs
+storage/.pipeline.lock
+storage/logs/
+
+# Keep config source spreadsheet (overrides *.xlsx above)
+!BalVoi_30 Content.xlsx

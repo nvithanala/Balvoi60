@@ -1,0 +1,43 @@
+{% extends "base.html" %} {% block title %}{{ edition.name }} — {{ edition.editionName }}{% endblock %} {% block content %}
+<a class="subscribe-link" href="/feed/{{ edition.slug }}.xml">Subscribe — RSS feed →</a>
+
+{% if latest %} {% set episode = latest %} {% include "_player.html" %} {% else %}
+<section class="state-card">
+  <p>No episodes have been produced for this edition yet.</p>
+</section>
+{% endif %}
+
+<section class="coverage-section">
+  <div class="section-head">
+    <h2>Coverage</h2>
+    <span>{{ edition.sourceCountries | length }} countries</span>
+  </div>
+  <ul class="coverage-list">
+    {% for c in edition.sourceCountries %}
+    <li>{{ c }}</li>
+    {% endfor %}
+  </ul>
+</section>
+
+{% if latest %} {% set episode = latest %} {% include "_headlines.html" %} {% endif %} {% if recent %}
+<section class="history-section">
+  <div class="section-head">
+    <h2>Recent episodes</h2>
+    <span>{{ recent | length }} available</span>
+  </div>
+  <div class="episode-list">
+    {% for r in recent %}
+    <a class="episode-card" href="/episode/{{ r.id }}">
+      <div class="episode-card-icon">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M8 5v14l11-7z" /></svg>
+      </div>
+      <div class="episode-card-body">
+        <h3>{{ r.timestamp | datetime }}</h3>
+        <p>{{ r.headlines[0] if r.headlines else r.editionName }}</p>
+      </div>
+      <span class="episode-card-dur">{{ r.durationSeconds | duration }}</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %} {% endblock %}

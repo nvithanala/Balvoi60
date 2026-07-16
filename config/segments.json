@@ -1,0 +1,504 @@
+{
+  "welcome": {
+    "en": [
+      "Welcome to BalVoi:30, your balanced voice in news powered by NewsGenie. Bias-free breaking news and updates every thirty minutes."
+    ],
+    "es": [
+      "Bienvenidos a BalVoi:30, su voz equilibrada en las noticias, impulsada por NewsGenie. Noticias de última hora y actualizaciones libres de sesgo cada treinta minutos."
+    ],
+    "pt": [
+      "Bem-vindos ao BalVoi:30, sua voz equilibrada nas notícias, impulsionada pela NewsGenie. Notícias de última hora e atualizações livres de viés a cada trinta minutos."
+    ],
+    "fr": [
+      "Bienvenue sur BalVoi:30, votre voix équilibrée de l'actualité, propulsée par NewsGenie. Actualités de dernière heure et analyses impartiales toutes les trente minutes."
+    ],
+    "de": [
+      "Willkommen bei BalVoi:30, Ihrer ausgewogenen Stimme für Nachrichten, unterstützt von NewsGenie. Aktuelle Nachrichten und Eilmeldungen ohne Voreingenommenheit – alle dreißig Minuten."
+    ],
+    "ar": [
+      "مرحبًا بكم في BalVoi:30، صوتكم المتوازن في الأخبار والمدعوم من NewsGenie. أخبار عاجلة وتحديثات موضوعية كل ثلاثين دقيقة."
+    ],
+    "ru": [
+      "Добро пожаловать на BalVoi:30 — ваш сбалансированный голос в новостях при поддержке NewsGenie. Срочные новости и объективные обновления каждые тридцать минут."
+    ],
+    "tr": [
+      "BalVoi:30'a hoş geldiniz. NewsGenie tarafından desteklenen, haberlerdeki dengeli sesiniz. Tarafsız son dakika haberleri ve güncellemeler her otuz dakikada bir."
+    ]
+  },
+  "started": {
+    "en": [
+      "Let's get started.",
+      "Let's begin.",
+      "Here's what's making headlines today.",
+      "Let's take a look at today's top stories.",
+      "Here are today's leading headlines.",
+      "Now, to the news.",
+      "Let's dive into today's developments.",
+      "Here's what you need to know.",
+      "Let's get you caught up on today's news.",
+      "Let's begin with today's top stories."
+    ],
+    "es": [
+      "Comencemos.",
+      "Vamos a comenzar.",
+      "Estas son las principales noticias de hoy.",
+      "Veamos los titulares más importantes.",
+      "Comenzamos con las noticias más destacadas.",
+      "Aquí está lo que necesita saber.",
+      "Pasemos a las noticias.",
+      "Estos son los acontecimientos más importantes del día.",
+      "Iniciamos con los principales titulares.",
+      "Vamos con las noticias de hoy."
+    ],
+    "pt": [
+      "Vamos começar.",
+      "Comecemos.",
+      "Estas são as principais notícias de hoje.",
+      "Vamos aos destaques do dia.",
+      "Confira os principais acontecimentos.",
+      "Aqui está o que você precisa saber.",
+      "Vamos às notícias.",
+      "Começamos com as manchetes mais importantes.",
+      "Veja os assuntos que estão movimentando o dia.",
+      "Vamos acompanhar os principais destaques."
+    ],
+    "fr": [
+      "Commençons.",
+      "Entrons dans l'actualité.",
+      "Voici les principaux titres du jour.",
+      "Passons aux nouvelles.",
+      "Voici ce qu'il faut retenir aujourd'hui.",
+      "Regardons les principaux développements.",
+      "Commençons par les grandes actualités.",
+      "Voici les informations essentielles.",
+      "Voici les faits marquants de la journée.",
+      "Découvrons les principaux événements du jour."
+    ],
+    "de": [
+      "Beginnen wir.",
+      "Legen wir los.",
+      "Hier sind die wichtigsten Nachrichten des Tages.",
+      "Werfen wir einen Blick auf die Schlagzeilen.",
+      "Kommen wir zu den Nachrichten.",
+      "Das sind die wichtigsten Entwicklungen.",
+      "Hier ist, was Sie wissen sollten.",
+      "Starten wir mit den heutigen Top-Meldungen.",
+      "Schauen wir auf die wichtigsten Ereignisse.",
+      "Hier sind die heutigen Schlagzeilen."
+    ],
+    "ar": [
+      "لنبدأ.",
+      "دعونا نبدأ.",
+      "إليكم أبرز الأخبار اليوم.",
+      "لنلقِ نظرة على أهم العناوين.",
+      "نبدأ بأهم التطورات.",
+      "إليكم ما تحتاجون إلى معرفته.",
+      "ننتقل الآن إلى الأخبار.",
+      "هذه أبرز أحداث اليوم.",
+      "نبدأ بالعناوين الرئيسية.",
+      "إليكم أهم المستجدات."
+    ],
+    "ru": [
+      "Начнём.",
+      "Давайте начнём.",
+      "Вот главные новости дня.",
+      "Перейдём к главным событиям.",
+      "Начинаем с главных заголовков.",
+      "Вот что важно знать сегодня.",
+      "Переходим к новостям.",
+      "Рассмотрим основные события дня.",
+      "Вот главные темы сегодняшнего дня.",
+      "Начнём с главных новостей."
+    ],
+    "tr": [
+      "Başlayalım.",
+      "Hadi başlayalım.",
+      "Günün öne çıkan haberleriyle başlayalım.",
+      "İşte günün önemli başlıkları.",
+      "Şimdi haberlere geçelim.",
+      "Bilmeniz gereken gelişmeler burada.",
+      "Günün manşetlerine göz atalım.",
+      "En önemli gelişmelerle başlıyoruz.",
+      "İşte bugün öne çıkan olaylar.",
+      "Günün haberlerine başlayalım."
+    ]
+  },
+  "right_back": {
+    "en": [
+      "We will be right back after this important message.",
+      "Stay with us, we'll return after a brief message.",
+      "We'll be back in a moment following this important announcement.",
+      "Don't go away, we'll return after this brief message.",
+      "We'll continue after a short break.",
+      "Stay tuned, more news ahead after this message.",
+      "We'll be back shortly with more coverage.",
+      "After this important message, we'll return with the latest updates.",
+      "We'll take a brief pause and return in just a moment.",
+      "More headlines are ahead. We'll be right back."
+    ],
+    "es": [
+      "Volveremos enseguida después de este importante mensaje.",
+      "No se vaya, regresamos después de este breve mensaje.",
+      "Estaremos de vuelta en un momento tras este importante anuncio.",
+      "Permanezca con nosotros, volvemos enseguida.",
+      "Continuamos después de una breve pausa.",
+      "Más noticias en instantes, después de este mensaje.",
+      "Regresamos en breve con más información.",
+      "Tras este importante mensaje, continuaremos con las últimas noticias.",
+      "Haremos una breve pausa y volveremos enseguida.",
+      "No se desconecte, ya regresamos."
+    ],
+    "pt": [
+      "Voltamos já após esta importante mensagem.",
+      "Fique conosco, retornamos após este breve comunicado.",
+      "Estaremos de volta em instantes após este importante anúncio.",
+      "Não saia daí, voltamos já.",
+      "Continuamos após uma breve pausa.",
+      "Mais notícias em instantes, depois desta mensagem.",
+      "Voltamos em breve com mais informações.",
+      "Após esta importante mensagem, seguiremos com as últimas notícias.",
+      "Faremos uma rápida pausa e retornaremos em seguida.",
+      "Continue conosco, já voltamos."
+    ],
+    "fr": [
+      "Nous revenons dans un instant après cet important message.",
+      "Restez avec nous, nous revenons après une courte annonce.",
+      "Nous serons de retour dans quelques instants.",
+      "Ne quittez pas, nous revenons tout de suite.",
+      "Nous poursuivrons après une courte pause.",
+      "Plus d'actualités après ce message important.",
+      "Nous revenons bientôt avec les dernières informations.",
+      "Après cette importante annonce, nous poursuivrons notre couverture.",
+      "Une courte pause, puis nous revenons.",
+      "Restez à l'écoute, nous revenons dans un instant."
+    ],
+    "de": [
+      "Wir sind gleich nach dieser wichtigen Mitteilung zurück.",
+      "Bleiben Sie bei uns, wir kehren nach einer kurzen Nachricht zurück.",
+      "Nach dieser wichtigen Ankündigung sind wir gleich wieder da.",
+      "Bitte bleiben Sie dran, wir sind gleich zurück.",
+      "Nach einer kurzen Pause geht es weiter.",
+      "Weitere Nachrichten folgen nach dieser wichtigen Mitteilung.",
+      "Wir melden uns in Kürze zurück.",
+      "Nach dieser wichtigen Nachricht setzen wir unsere Berichterstattung fort.",
+      "Eine kurze Unterbrechung, dann sind wir wieder da.",
+      "Bleiben Sie dran, wir kehren gleich zurück."
+    ],
+    "ar": [
+      "سنعود بعد هذه الرسالة المهمة.",
+      "ابقوا معنا، نعود بعد هذا الإعلان القصير.",
+      "سنكون معكم مجددًا بعد هذه الرسالة المهمة.",
+      "لا تبتعدوا، سنعود بعد قليل.",
+      "نواصل بعد فاصل قصير.",
+      "المزيد من الأخبار بعد هذه الرسالة المهمة.",
+      "سنعود قريبًا مع المزيد من التحديثات.",
+      "بعد هذه الرسالة المهمة، نتابع تغطيتنا الإخبارية.",
+      "فاصل قصير ونعود إليكم.",
+      "ابقوا على المتابعة، سنعود بعد لحظات."
+    ],
+    "ru": [
+      "Мы вернёмся сразу после этого важного сообщения.",
+      "Оставайтесь с нами, мы скоро вернёмся.",
+      "Мы продолжим после этого важного объявления.",
+      "Не переключайтесь, мы скоро вернёмся.",
+      "После короткой паузы мы продолжим.",
+      "Больше новостей сразу после этого сообщения.",
+      "Мы скоро вернёмся с новыми подробностями.",
+      "После этого важного сообщения продолжим наш выпуск.",
+      "Сделаем небольшую паузу и скоро вернёмся.",
+      "Оставайтесь с нами, мы скоро вернёмся в эфир."
+    ],
+    "tr": [
+      "Bu önemli mesajın ardından hemen geri döneceğiz.",
+      "Bizimle kalın, kısa bir mesajın ardından geri dönüyoruz.",
+      "Bu önemli duyurunun ardından yayınımıza devam edeceğiz.",
+      "Bir yere ayrılmayın, birazdan geri döneceğiz.",
+      "Kısa bir aranın ardından devam edeceğiz.",
+      "Bu önemli mesajdan sonra daha fazla haber sizlerle olacak.",
+      "Yakında yeni gelişmelerle geri döneceğiz.",
+      "Bu önemli mesajın ardından haberlerimize devam edeceğiz.",
+      "Kısa bir ara veriyoruz, birazdan geri dönüyoruz.",
+      "Bizi izlemeye devam edin, birazdan yeniden birlikte olacağız."
+    ]
+  },
+  "ad_1": {
+    "en": [
+      "Trust in information isn't a feature. It's a requirement.\n\nPublishers, platforms, and governments around the world face a growing challenge: how do you ensure information is fair, transparent, and trustworthy?\n\nNewsGenie helps organizations identify bias, improve civility, and build confidence in the information they provide.\n\nBecause trust isn't something you claim.\n\nIt's something you prove.\n\nLearn more at NewsGenie.ai.",
+      "The world has no shortage of information.\n\nWhat it needs is more trust.\n\nNewsGenie provides technologies that help publishers, platforms, educators, and governments identify bias, improve transparency, and strengthen public confidence.\n\nThe future of information isn't about producing more content.\n\nIt's about making information more trustworthy.\n\nNewsGenie.ai\n\nTrust. Transparency. Accountability.",
+      "Roads have infrastructure.\n\nPower grids have infrastructure.\n\nFinancial systems have infrastructure.\n\nShouldn't public trust have infrastructure too?\n\nNewsGenie develops technologies that help organizations measure bias, improve civility, and strengthen confidence in the information people rely on every day.\n\nBecause trust should not be left to chance.\n\nLearn how at NewsGenie.ai."
+    ],
+    "es": [
+      "La confianza en la información no es una característica. Es un requisito.\n\nLos medios de comunicación, las plataformas digitales y los gobiernos enfrentan un desafío cada vez mayor: ¿cómo garantizar que la información sea justa, transparente y confiable?\n\nNewsGenie ayuda a las organizaciones a identificar sesgos, mejorar la calidad del diálogo y fortalecer la confianza pública.\n\nPorque la confianza no se proclama.\n\nSe demuestra.\n\nConozca más en NewsGenie.ai.",
+      "El mundo no tiene escasez de información.\n\nLo que necesita es más confianza.\n\nNewsGenie proporciona tecnologías que ayudan a medios de comunicación, plataformas digitales, educadores y gobiernos a identificar sesgos, mejorar la transparencia y fortalecer la confianza pública.\n\nEl futuro de la información no consiste en producir más contenido.\n\nConsiste en hacer que la información sea más confiable.\n\nNewsGenie.ai\n\nConfianza. Transparencia. Responsabilidad.",
+      "Las carreteras tienen infraestructura.\n\nLas redes eléctricas tienen infraestructura.\n\nLos sistemas financieros tienen infraestructura.\n\n¿No debería la confianza pública tener infraestructura también?\n\nNewsGenie desarrolla tecnologías que ayudan a las organizaciones a medir sesgos, mejorar la calidad del diálogo y fortalecer la confianza en la información de la que dependen las personas cada día.\n\nPorque la confianza no debería dejarse al azar.\n\nDescubra cómo en NewsGenie.ai."
+    ],
+    "pt": [
+      "A confiança na informação não é um diferencial. É uma necessidade.\n\nVeículos de comunicação, plataformas digitais e governos enfrentam um desafio crescente: como garantir que a informação seja justa, transparente e confiável?\n\nA NewsGenie ajuda organizações a identificar vieses, promover conversas mais saudáveis e fortalecer a confiança do público.\n\nPorque confiança não é algo que se declara.\n\nÉ algo que se comprova.\n\nSaiba mais em NewsGenie.ai.",
+      "O mundo não sofre com a falta de informação.\n\nO que falta é mais confiança.\n\nA NewsGenie fornece tecnologias que ajudam veículos de comunicação, plataformas digitais, educadores e governos a identificar vieses, aumentar a transparência e fortalecer a confiança pública.\n\nO futuro da informação não está em produzir mais conteúdo.\n\nEstá em tornar a informação mais confiável.\n\nNewsGenie.ai\n\nConfiança. Transparência. Responsabilidade.",
+      "Estradas têm infraestrutura.\n\nRedes elétricas têm infraestrutura.\n\nSistemas financeiros têm infraestrutura.\n\nA confiança pública não deveria ter infraestrutura também?\n\nA NewsGenie desenvolve tecnologias que ajudam organizações a medir vieses, melhorar a qualidade das conversas e fortalecer a confiança nas informações das quais as pessoas dependem todos os dias.\n\nPorque a confiança não deve ser deixada ao acaso.\n\nSaiba mais em NewsGenie.ai."
+    ],
+    "fr": [
+      "La confiance dans l'information n'est pas un avantage.\n\nC'est une exigence.\n\nLes médias, les plateformes numériques et les gouvernements sont confrontés à un défi croissant : comment garantir une information équitable, transparente et digne de confiance ?\n\nNewsGenie aide les organisations à identifier les biais, à améliorer la qualité des échanges et à renforcer la confiance du public.\n\nParce que la confiance ne se proclame pas.\n\nElle se démontre.\n\nDécouvrez-en plus sur NewsGenie.ai.",
+      "Le monde ne manque pas d'information.\n\nCe dont il a besoin, c'est de davantage de confiance.\n\nNewsGenie fournit des technologies qui aident les médias, les plateformes numériques, les établissements d'enseignement et les gouvernements à identifier les biais, à renforcer la transparence et à accroître la confiance du public.\n\nL'avenir de l'information ne consiste pas à produire davantage de contenu.\n\nIl consiste à rendre l'information plus digne de confiance.\n\nNewsGenie.ai\n\nConfiance. Transparence. Responsabilité.",
+      "Les routes ont une infrastructure.\n\nLes réseaux électriques ont une infrastructure.\n\nLes systèmes financiers ont une infrastructure.\n\nLa confiance du public ne devrait-elle pas avoir une infrastructure elle aussi ?\n\nNewsGenie développe des technologies qui aident les organisations à mesurer les biais, à améliorer la qualité des échanges et à renforcer la confiance dans les informations dont les citoyens dépendent chaque jour.\n\nParce que la confiance ne devrait jamais être laissée au hasard.\n\nDécouvrez comment sur NewsGenie.ai."
+    ],
+    "de": [
+      "Vertrauen in Informationen ist kein Extra.\n\nEs ist eine Voraussetzung.\n\nMedienhäuser, Plattformen und Regierungen stehen vor einer wachsenden Herausforderung: Wie lässt sich sicherstellen, dass Informationen fair, transparent und vertrauenswürdig sind?\n\nNewsGenie unterstützt Organisationen dabei, Voreingenommenheit zu erkennen, den öffentlichen Diskurs zu verbessern und Vertrauen aufzubauen.\n\nDenn Vertrauen wird nicht behauptet.\n\nVertrauen wird bewiesen.\n\nErfahren Sie mehr auf NewsGenie.ai.",
+      "An Informationen mangelt es der Welt nicht.\n\nWas fehlt, ist mehr Vertrauen.\n\nNewsGenie bietet Technologien, die Medienhäusern, Plattformen, Bildungseinrichtungen und Regierungen helfen, Voreingenommenheit zu erkennen, Transparenz zu fördern und öffentliches Vertrauen zu stärken.\n\nDie Zukunft der Information besteht nicht darin, mehr Inhalte zu produzieren.\n\nSondern darin, Informationen vertrauenswürdiger zu machen.\n\nNewsGenie.ai\n\nVertrauen. Transparenz. Verantwortung.",
+      "Straßen haben Infrastruktur.\n\nStromnetze haben Infrastruktur.\n\nFinanzsysteme haben Infrastruktur.\n\nSollte öffentliches Vertrauen nicht ebenfalls eine Infrastruktur haben?\n\nNewsGenie entwickelt Technologien, die Organisationen dabei unterstützen, Voreingenommenheit zu messen, den öffentlichen Diskurs zu verbessern und das Vertrauen in Informationen zu stärken, auf die Menschen jeden Tag angewiesen sind.\n\nDenn Vertrauen sollte nicht dem Zufall überlassen werden.\n\nErfahren Sie mehr auf NewsGenie.ai."
+    ],
+    "ar": [
+      "الثقة في المعلومات ليست ميزة إضافية.\n\nإنها ضرورة.\n\nتواجه المؤسسات الإعلامية والمنصات الرقمية والحكومات تحديًا متزايدًا: كيف يمكن ضمان أن تكون المعلومات عادلة وشفافة وجديرة بالثقة؟\n\nتساعد NewsGenie المؤسسات على تحديد التحيزات وتعزيز جودة الحوار وبناء الثقة العامة.\n\nلأن الثقة لا تُعلَن.\n\nبل تُثبَت.\n\nاعرف المزيد على NewsGenie.ai.",
+      "لا يعاني العالم من نقص في المعلومات.\n\nما يحتاجه هو المزيد من الثقة.\n\nتوفر NewsGenie تقنيات تساعد المؤسسات الإعلامية والمنصات الرقمية والمؤسسات التعليمية والحكومات على تحديد التحيزات وتعزيز الشفافية وتقوية الثقة العامة.\n\nمستقبل المعلومات لا يتمثل في إنتاج المزيد من المحتوى.\n\nبل في جعل المعلومات أكثر موثوقية.\n\nNewsGenie.ai\n\nالثقة. الشفافية. المساءلة.",
+      "للطرق بنية تحتية.\n\nولشبكات الكهرباء بنية تحتية.\n\nوللأنظمة المالية بنية تحتية.\n\nأفلا ينبغي أن تكون للثقة العامة بنية تحتية أيضًا؟\n\nتطوّر NewsGenie تقنيات تساعد المؤسسات على قياس التحيزات وتعزيز جودة الحوار وتقوية الثقة في المعلومات التي يعتمد عليها الناس كل يوم.\n\nلأن الثقة لا ينبغي أن تُترك للصدفة.\n\nاعرف كيف على NewsGenie.ai."
+    ],
+    "ru": [
+      "Доверие к информации — это не преимущество.\n\nЭто необходимость.\n\nСредства массовой информации, цифровые платформы и государственные организации сталкиваются с растущим вызовом: как обеспечить, чтобы информация была объективной, прозрачной и заслуживающей доверия?\n\nNewsGenie помогает организациям выявлять предвзятость, улучшать качество общественного диалога и укреплять доверие аудитории.\n\nПотому что доверие нельзя просто заявить.\n\nЕго нужно доказать.\n\nУзнайте больше на NewsGenie.ai.",
+      "Мир не испытывает недостатка в информации.\n\nЕму не хватает доверия.\n\nNewsGenie предоставляет технологии, которые помогают средствам массовой информации, цифровым платформам, образовательным учреждениям и государственным организациям выявлять предвзятость, повышать прозрачность и укреплять общественное доверие.\n\nБудущее информации заключается не в создании большего количества контента.\n\nОно заключается в том, чтобы сделать информацию более заслуживающей доверия.\n\nNewsGenie.ai\n\nДоверие. Прозрачность. Ответственность.",
+      "У дорог есть инфраструктура.\n\nУ энергосетей есть инфраструктура.\n\nУ финансовых систем есть инфраструктура.\n\nРазве общественное доверие не заслуживает собственной инфраструктуры?\n\nNewsGenie разрабатывает технологии, которые помогают организациям измерять предвзятость, улучшать качество общественного диалога и укреплять доверие к информации, на которую люди полагаются каждый день.\n\nПотому что доверие нельзя оставлять на волю случая.\n\nУзнайте больше на NewsGenie.ai."
+    ],
+    "tr": [
+      "Bilgiye duyulan güven bir ayrıcalık değildir.\n\nBir gerekliliktir.\n\nMedya kuruluşları, dijital platformlar ve kamu kurumları giderek büyüyen bir soruyla karşı karşıya: Bilginin adil, şeffaf ve güvenilir olması nasıl sağlanabilir?\n\nNewsGenie, kuruluşların önyargıları belirlemesine, daha sağlıklı diyaloglar oluşturmasına ve kamu güvenini güçlendirmesine yardımcı olur.\n\nÇünkü güven iddia edilmez.\n\nKanıtlanır.\n\nDaha fazla bilgi için NewsGenie.ai adresini ziyaret edin.",
+      "Dünyanın bilgi eksikliği yok.\n\nİhtiyaç duyduğu şey daha fazla güven.\n\nNewsGenie; medya kuruluşlarının, dijital platformların, eğitim kurumlarının ve kamu kuruluşlarının önyargıları belirlemesine, şeffaflığı artırmasına ve kamu güvenini güçlendirmesine yardımcı olan teknolojiler sunar.\n\nBilginin geleceği daha fazla içerik üretmek değildir.\n\nBilgiyi daha güvenilir hale getirmektir.\n\nNewsGenie.ai\n\nGüven. Şeffaflık. Sorumluluk.",
+      "Yolların bir altyapısı vardır.\n\nElektrik şebekelerinin bir altyapısı vardır.\n\nFinansal sistemlerin bir altyapısı vardır.\n\nPeki ya kamu güveni? Onun da bir altyapısı olmamalı mı?\n\nNewsGenie, kuruluşların önyargıları ölçmesine, daha sağlıklı diyaloglar oluşturmasına ve insanların her gün güvendiği bilgilere olan güveni artırmasına yardımcı olan teknolojiler geliştirir.\n\nÇünkü güven şansa bırakılmamalıdır.\n\nNasıl olduğunu öğrenmek için NewsGenie.ai adresini ziyaret edin."
+    ]
+  },
+  "welcome_back": {
+    "en": [
+      "Welcome back.",
+      "Welcome back to the show.",
+      "Welcome back to the podcast.",
+      "Thanks for staying with us.",
+      "We're glad you're back with us.",
+      "Welcome back to BalVoi.",
+      "Let's continue with today's coverage.",
+      "Now, back to the news.",
+      "Let's get back to today's headlines.",
+      "Thanks for joining us again."
+    ],
+    "es": [
+      "Bienvenidos de nuevo.",
+      "Bienvenidos nuevamente al programa.",
+      "Bienvenidos nuevamente al podcast.",
+      "Gracias por acompañarnos.",
+      "Nos alegra tenerlos de vuelta.",
+      "Bienvenidos de nuevo a BalVoi.",
+      "Continuemos con nuestra cobertura de hoy.",
+      "Volvemos a las noticias.",
+      "Regresemos a los principales titulares.",
+      "Gracias por seguir con nosotros."
+    ],
+    "pt": [
+      "Bem-vindos de volta.",
+      "Bem-vindos de volta ao programa.",
+      "Bem-vindos de volta ao podcast.",
+      "Obrigado por continuar conosco.",
+      "É um prazer tê-los de volta.",
+      "Bem-vindos de volta à BalVoi.",
+      "Vamos continuar nossa cobertura de hoje.",
+      "De volta às notícias.",
+      "Vamos retornar às principais manchetes.",
+      "Obrigado por permanecer conosco."
+    ],
+    "fr": [
+      "Bon retour parmi nous.",
+      "Bienvenue à nouveau dans l'émission.",
+      "Bienvenue à nouveau dans le podcast.",
+      "Merci de rester avec nous.",
+      "Nous sommes heureux de vous retrouver.",
+      "Bienvenue de nouveau sur BalVoi.",
+      "Poursuivons notre couverture de l'actualité.",
+      "Retour aux nouvelles.",
+      "Revenons aux principaux titres.",
+      "Merci de votre fidélité."
+    ],
+    "de": [
+      "Willkommen zurück.",
+      "Willkommen zurück bei der Sendung.",
+      "Willkommen zurück zum Podcast.",
+      "Schön, dass Sie wieder dabei sind.",
+      "Danke, dass Sie bei uns geblieben sind.",
+      "Willkommen zurück bei BalVoi.",
+      "Setzen wir unsere Berichterstattung fort.",
+      "Zurück zu den Nachrichten.",
+      "Kehren wir zu den wichtigsten Schlagzeilen zurück.",
+      "Vielen Dank, dass Sie weiterhin dabei sind."
+    ],
+    "ar": [
+      "مرحبًا بعودتكم.",
+      "مرحبًا بعودتكم إلى البرنامج.",
+      "مرحبًا بعودتكم إلى البودكاست.",
+      "شكرًا لبقائكم معنا.",
+      "يسعدنا أن تكونوا معنا مجددًا.",
+      "مرحبًا بكم مجددًا في BalVoi.",
+      "لنواصل تغطيتنا الإخبارية.",
+      "نعود الآن إلى الأخبار.",
+      "لنعد إلى أبرز العناوين.",
+      "شكرًا لمتابعتكم المستمرة."
+    ],
+    "ru": [
+      "С возвращением.",
+      "Добро пожаловать обратно в программу.",
+      "Добро пожаловать обратно в подкаст.",
+      "Спасибо, что остаетесь с нами.",
+      "Рады снова быть с вами.",
+      "Добро пожаловать обратно на BalVoi.",
+      "Продолжим наш выпуск новостей.",
+      "Вернемся к новостям.",
+      "Давайте вернемся к главным заголовкам.",
+      "Спасибо, что остаетесь с нами."
+    ],
+    "tr": [
+      "Tekrar hoş geldiniz.",
+      "Programımıza yeniden hoş geldiniz.",
+      "Podcastimize yeniden hoş geldiniz.",
+      "Bizimle kaldığınız için teşekkür ederiz.",
+      "Yeniden aramızda olmanızdan memnuniyet duyuyoruz.",
+      "BalVoi'ye tekrar hoş geldiniz.",
+      "Haberlerimize kaldığımız yerden devam edelim.",
+      "Şimdi yeniden haberlere dönüyoruz.",
+      "Günün önemli başlıklarına geri dönelim.",
+      "Bizimle kaldığınız için teşekkürler."
+    ]
+  },
+  "ad_2": {
+    "en": [
+      "Every day, millions of people are exposed to more information than any generation before them.\n\nTrust has never been more valuable.\n\nBalVoi:30 delivers balanced and trustworthy news updates to a growing global audience every thirty minutes across multiple languages and regions.\n\nFor brands committed to integrity, transparency, innovation, and responsible AI, BalVoi:30 offers more than advertising.\n\nIt offers alignment with values.\n\nReach audiences who value facts, thoughtful analysis, and trustworthy information.\n\nTo learn more about sponsorship opportunities, visit BalVoi.com.\n\nBalVoi:30. The balanced voice in news.",
+      "What does your brand stand for?\n\nIn a world of information overload, growing polarization, and declining trust, consumers increasingly support organizations that value transparency, trust, and accountability.\n\nBalVoi:30 is building a global network of multilingual news programming powered by NewsGenie technology and dedicated to trustworthy information and informed audiences.\n\nWe invite mission-driven brands to join us.\n\nIf your organization believes technology should strengthen understanding rather than division, and that trust is earned through action, we'd love to talk.\n\nLearn more about sponsorship opportunities at BalVoi.com.\n\nBalVoi:30. Trustworthy information for a connected world.",
+      "Artificial intelligence is changing how the world creates, distributes, and consumes information.\n\nThe question is not whether AI will shape the future.\n\nThe question is how.\n\nBalVoi:30 partners with organizations that believe AI can be used responsibly to increase transparency, improve understanding, and strengthen public trust.\n\nOur multilingual information network reaches audiences across North America, Latin America, Europe, the Middle East, and Eurasia.\n\nIf your brand believes in innovation with purpose, we invite you to join us.\n\nBalVoi:30.\n\nGlobal reach. Trustworthy information. Responsible AI."
+    ],
+    "es": [
+      "Cada día, millones de personas están expuestas a más información que cualquier generación anterior.\n\nLa confianza nunca ha sido tan valiosa.\n\nBalVoi:30 ofrece noticias equilibradas y confiables a una audiencia global en crecimiento, con actualizaciones cada treinta minutos en múltiples idiomas y regiones.\n\nPara las marcas comprometidas con la integridad, la transparencia, la innovación y la inteligencia artificial responsable, BalVoi:30 ofrece mucho más que publicidad.\n\nOfrece una conexión con valores compartidos.\n\nConecte con audiencias que valoran los hechos, el análisis reflexivo y la información confiable.\n\nPara conocer oportunidades de patrocinio, visite BalVoi.com.\n\nBalVoi:30. La voz equilibrada de las noticias.",
+      "¿Qué representa su marca?\n\nEn un mundo de sobrecarga informativa, creciente polarización y disminución de la confianza, los consumidores apoyan cada vez más a las organizaciones que valoran la transparencia, la confianza y la responsabilidad.\n\nBalVoi:30 está construyendo una red global de programación informativa multilingüe impulsada por la tecnología de NewsGenie y dedicada a la información confiable y a audiencias bien informadas.\n\nInvitamos a las marcas con propósito a unirse a nosotros.\n\nSi su organización cree que la tecnología debe fortalecer el entendimiento en lugar de la división, y que la confianza se gana con acciones, nos gustaría conversar.\n\nObtenga más información sobre oportunidades de patrocinio en BalVoi.com.\n\nBalVoi:30. Información confiable para un mundo conectado.",
+      "La inteligencia artificial está transformando la forma en que el mundo crea, distribuye y consume información.\n\nLa pregunta no es si la inteligencia artificial cambiará el futuro.\n\nLa pregunta es cómo lo hará.\n\nBalVoi:30 colabora con organizaciones que creen que la inteligencia artificial puede utilizarse de manera responsable para aumentar la transparencia, mejorar el entendimiento y fortalecer la confianza pública.\n\nNuestra red multilingüe de información conecta audiencias en América del Norte, América Latina, Europa, Oriente Medio y Eurasia.\n\nSi su organización cree en la innovación con propósito, queremos conocerla.\n\nBalVoi:30.\n\nAlcance global. Información confiable. Inteligencia artificial responsable."
+    ],
+    "pt": [
+      "Todos os dias, milhões de pessoas são expostas a mais informação do que qualquer geração anterior.\n\nA confiança nunca foi tão valiosa.\n\nA BalVoi:30 oferece notícias equilibradas e confiáveis para uma audiência global em crescimento, com atualizações a cada trinta minutos em vários idiomas e regiões.\n\nPara marcas comprometidas com integridade, transparência, inovação e inteligência artificial responsável, a BalVoi:30 oferece mais do que publicidade.\n\nOferece alinhamento com valores.\n\nConecte-se com públicos que valorizam fatos, análises cuidadosas e informação confiável.\n\nSaiba mais sobre oportunidades de patrocínio em BalVoi.com.\n\nBalVoi:30. A voz equilibrada das notícias.",
+      "O que a sua marca representa?\n\nEm um mundo de excesso de informação, crescente polarização e queda da confiança, os consumidores apoiam cada vez mais organizações que valorizam transparência, confiança e responsabilidade.\n\nA BalVoi:30 está construindo uma rede global de programação informativa multilíngue impulsionada pela tecnologia da NewsGenie e dedicada à informação confiável e a públicos bem informados.\n\nConvidamos marcas com propósito a se juntarem a nós.\n\nSe sua organização acredita que a tecnologia deve fortalecer a compreensão em vez da divisão, e que a confiança é conquistada por meio de ações, gostaríamos de conversar.\n\nSaiba mais sobre oportunidades de patrocínio em BalVoi.com.\n\nBalVoi:30. Informação confiável para um mundo conectado.",
+      "A inteligência artificial está transformando a maneira como o mundo cria, distribui e consome informação.\n\nA questão não é se a inteligência artificial moldará o futuro.\n\nA questão é como.\n\nA BalVoi:30 trabalha com organizações que acreditam que a inteligência artificial pode ser usada de forma responsável para aumentar a transparência, melhorar a compreensão e fortalecer a confiança pública.\n\nNossa rede multilíngue de informação conecta audiências na América do Norte, América Latina, Europa, Oriente Médio e Eurásia.\n\nSe sua organização acredita em inovação com propósito, queremos conversar.\n\nBalVoi:30.\n\nAlcance global. Informação confiável. Inteligência artificial responsável."
+    ],
+    "fr": [
+      "Chaque jour, des millions de personnes sont exposées à davantage d'informations que n'importe quelle génération avant elles.\n\nLa confiance n'a jamais eu autant de valeur.\n\nBalVoi:30 propose des actualités équilibrées et dignes de confiance à une audience mondiale en pleine croissance, avec des mises à jour toutes les trente minutes dans plusieurs langues et régions.\n\nPour les marques qui valorisent l'intégrité, la transparence, l'innovation et une intelligence artificielle responsable, BalVoi:30 représente bien plus qu'un espace publicitaire.\n\nC'est l'occasion de s'associer à des valeurs partagées.\n\nRejoignez des audiences qui apprécient les faits, l'analyse réfléchie et une information digne de confiance.\n\nPour en savoir plus sur les opportunités de partenariat, rendez-vous sur BalVoi.com.\n\nBalVoi:30. La voix équilibrée de l'actualité.",
+      "Que représente votre marque ?\n\nDans un monde marqué par la surcharge d'information, une polarisation croissante et un recul de la confiance, les consommateurs soutiennent de plus en plus les organisations qui valorisent la transparence, la confiance et la responsabilité.\n\nBalVoi:30 construit un réseau mondial de programmes d'information multilingues alimenté par la technologie NewsGenie et dédié à une information fiable et à des audiences éclairées.\n\nNous invitons les marques porteuses d'une mission à nous rejoindre.\n\nSi votre organisation croit que la technologie doit renforcer la compréhension plutôt que la division, et que la confiance se gagne par les actes, nous serions heureux d'échanger avec vous.\n\nDécouvrez les opportunités de partenariat sur BalVoi.com.\n\nBalVoi:30. Une information fiable pour un monde connecté.",
+      "L'intelligence artificielle transforme la manière dont le monde crée, diffuse et consomme l'information.\n\nLa question n'est pas de savoir si l'intelligence artificielle façonnera l'avenir.\n\nLa question est de savoir comment.\n\nBalVoi:30 s'associe à des organisations qui croient que l'intelligence artificielle peut être utilisée de manière responsable pour renforcer la transparence, améliorer la compréhension et accroître la confiance du public.\n\nNotre réseau multilingue d'information rejoint des audiences en Amérique du Nord, en Amérique latine, en Europe, au Moyen-Orient et en Eurasie.\n\nSi votre organisation croit en une innovation porteuse de sens, nous aimerions échanger avec vous.\n\nBalVoi:30.\n\nPortée mondiale. Information digne de confiance. Intelligence artificielle responsable."
+    ],
+    "de": [
+      "Jeden Tag werden Millionen Menschen mit mehr Informationen konfrontiert als jede Generation zuvor.\n\nVertrauen war noch nie so wertvoll.\n\nBalVoi:30 liefert ausgewogene und vertrauenswürdige Nachrichten an ein wachsendes globales Publikum – alle dreißig Minuten, in mehreren Sprachen und Regionen.\n\nFür Marken, die für Integrität, Transparenz, Innovation und verantwortungsvolle künstliche Intelligenz stehen, bietet BalVoi:30 mehr als Werbung.\n\nEs bietet die Möglichkeit, gemeinsame Werte zu unterstützen.\n\nErreichen Sie Menschen, die Fakten, fundierte Analysen und vertrauenswürdige Informationen schätzen.\n\nErfahren Sie mehr über Sponsoring-Möglichkeiten auf BalVoi.com.\n\nBalVoi:30. Die ausgewogene Stimme der Nachrichten.",
+      "Wofür steht Ihre Marke?\n\nIn einer Welt voller Informationsüberlastung, wachsender Polarisierung und schwindenden Vertrauens unterstützen Verbraucher zunehmend Organisationen, die Transparenz, Vertrauen und Verantwortung schätzen.\n\nBalVoi:30 baut ein globales Netzwerk mehrsprachiger Nachrichtenprogramme auf, das von der NewsGenie-Technologie unterstützt wird und sich vertrauenswürdigen Informationen sowie informierten Zielgruppen widmet.\n\nWir laden werteorientierte Marken ein, Teil dieser Mission zu werden.\n\nWenn Ihr Unternehmen daran glaubt, dass Technologie Verständnis fördern statt Spaltung vertiefen sollte und dass Vertrauen durch Taten verdient wird, würden wir uns gerne mit Ihnen austauschen.\n\nErfahren Sie mehr über Sponsoring-Möglichkeiten auf BalVoi.com.\n\nBalVoi:30. Vertrauenswürdige Informationen für eine vernetzte Welt.",
+      "Künstliche Intelligenz verändert, wie die Welt Informationen erstellt, verbreitet und konsumiert.\n\nDie Frage ist nicht, ob künstliche Intelligenz die Zukunft prägen wird.\n\nDie Frage ist, wie.\n\nBalVoi:30 arbeitet mit Organisationen zusammen, die daran glauben, dass künstliche Intelligenz verantwortungsvoll eingesetzt werden kann, um Transparenz zu fördern, Verständnis zu verbessern und öffentliches Vertrauen zu stärken.\n\nUnser mehrsprachiges Informationsnetzwerk erreicht Zielgruppen in Nordamerika, Lateinamerika, Europa, dem Nahen Osten und Eurasien.\n\nWenn Ihr Unternehmen an Innovation mit Verantwortung glaubt, würden wir gerne mit Ihnen sprechen.\n\nBalVoi:30.\n\nGlobale Reichweite. Vertrauenswürdige Informationen. Verantwortungsvolle künstliche Intelligenz."
+    ],
+    "ar": [
+      "كل يوم، يتعرض ملايين الأشخاص لكمٍّ من المعلومات يفوق ما عرفه أي جيل سابق.\n\nلم تكن الثقة أكثر قيمة مما هي عليه اليوم.\n\nتقدم BalVoi:30 أخبارًا متوازنة وجديرة بالثقة لجمهور عالمي متنامٍ، مع تحديثات كل ثلاثين دقيقة عبر لغات ومناطق متعددة.\n\nبالنسبة للعلامات التجارية التي تؤمن بالنزاهة والشفافية والابتكار والذكاء الاصطناعي المسؤول، فإن BalVoi:30 تقدم أكثر من مجرد فرصة إعلانية.\n\nإنها فرصة للارتباط بقيم مشتركة.\n\nتواصلوا مع جمهور يقدّر الحقائق والتحليل المدروس والمعلومات الموثوقة.\n\nللتعرف على فرص الرعاية، زوروا BalVoi.com.\n\nBalVoi:30. الصوت المتوازن في الأخبار.",
+      "بماذا تُعرف علامتكم التجارية؟\n\nفي عالم يشهد فيضًا من المعلومات وتزايدًا في الاستقطاب وتراجعًا في الثقة، يتجه المستهلكون بشكل متزايد نحو المؤسسات التي تؤمن بالشفافية والثقة والمساءلة.\n\nتبني BalVoi:30 شبكة عالمية من البرامج الإخبارية متعددة اللغات، مدعومة بتقنية NewsGenie ومكرسة لتقديم معلومات موثوقة لجمهور واعٍ ومطلع.\n\nندعو العلامات التجارية ذات الرسالة الواضحة للانضمام إلينا.\n\nإذا كانت مؤسستكم تؤمن بأن التكنولوجيا يجب أن تعزز الفهم بدلاً من الانقسام، وأن الثقة تُكتسب من خلال الأفعال، فسيسعدنا التواصل معكم.\n\nتعرفوا على فرص الرعاية عبر BalVoi.com.\n\nBalVoi:30. معلومات موثوقة لعالم مترابط.",
+      "يُغيّر الذكاء الاصطناعي الطريقة التي يُنشئ بها العالم المعلومات ويوزعها ويستهلكها.\n\nالسؤال ليس ما إذا كان الذكاء الاصطناعي سيشكل المستقبل.\n\nالسؤال هو كيف.\n\nتتعاون BalVoi:30 مع المؤسسات التي تؤمن بأن الذكاء الاصطناعي يمكن استخدامه بمسؤولية لتعزيز الشفافية وتحسين الفهم وتقوية الثقة العامة.\n\nتصل شبكتنا متعددة اللغات للمعلومات إلى جماهير في أمريكا الشمالية وأمريكا اللاتينية وأوروبا والشرق الأوسط وأوراسيا.\n\nإذا كانت مؤسستكم تؤمن بالابتكار الهادف، فنحن ندعوكم للانضمام إلينا.\n\nBalVoi:30.\n\nانتشار عالمي. معلومات جديرة بالثقة. ذكاء اصطناعي مسؤول."
+    ],
+    "ru": [
+      "Каждый день миллионы людей сталкиваются с большим объёмом информации, чем когда-либо прежде.\n\nДоверие ещё никогда не было столь ценным.\n\nBalVoi:30 предоставляет сбалансированные и надёжные новости для растущей международной аудитории, предлагая обновления каждые тридцать минут на нескольких языках.\n\nДля брендов, которые ценят честность, прозрачность, инновации и ответственное использование искусственного интеллекта, BalVoi:30 — это больше, чем реклама.\n\nЭто возможность поддержать общие ценности.\n\nПрисоединяйтесь к аудитории, которая ценит факты, вдумчивый анализ и надёжную информацию.\n\nУзнайте больше о возможностях спонсорства на BalVoi.com.\n\nBalVoi:30. Сбалансированный голос новостей.",
+      "Что представляет собой ваш бренд?\n\nВ мире информационной перегрузки, растущей поляризации и снижения уровня доверия люди всё чаще поддерживают организации, которые ценят прозрачность, доверие и ответственность.\n\nBalVoi:30 создаёт глобальную сеть многоязычных новостных программ на базе технологий NewsGenie, ориентированную на надёжную информацию и информированную аудиторию.\n\nМы приглашаем бренды с миссией присоединиться к нам.\n\nЕсли ваша организация считает, что технологии должны укреплять взаимопонимание, а не усиливать разногласия, и что доверие заслуживается действиями, мы будем рады сотрудничеству.\n\nУзнайте больше о возможностях спонсорства на BalVoi.com.\n\nBalVoi:30. Надёжная информация для взаимосвязанного мира.",
+      "Искусственный интеллект меняет способы создания, распространения и потребления информации во всём мире.\n\nВопрос не в том, повлияет ли искусственный интеллект на будущее.\n\nВопрос в том, каким будет это влияние.\n\nBalVoi:30 сотрудничает с организациями, которые считают, что искусственный интеллект должен использоваться ответственно для повышения прозрачности, улучшения понимания происходящего и укрепления общественного доверия.\n\nНаша многоязычная информационная сеть объединяет аудитории в Северной Америке, Латинской Америке, Европе, на Ближнем Востоке и в Евразии.\n\nЕсли ваша организация верит в инновации со смыслом, мы будем рады сотрудничеству.\n\nBalVoi:30.\n\nГлобальный охват. Надёжная информация. Ответственный искусственный интеллект."
+    ],
+    "tr": [
+      "Her gün milyonlarca insan, tarihteki herhangi bir nesilden daha fazla bilgiye maruz kalıyor.\n\nGüven hiç bu kadar değerli olmamıştı.\n\nBalVoi:30, her otuz dakikada bir yayınlanan güncellemelerle, birden fazla dil ve bölgede büyüyen küresel bir kitleye dengeli ve güvenilir haberler sunmaktadır.\n\nDürüstlük, şeffaflık, yenilikçilik ve sorumlu yapay zekâ değerlerine bağlı markalar için BalVoi:30 yalnızca bir reklam fırsatı değildir.\n\nOrtak değerlere dayalı bir iş birliği fırsatıdır.\n\nGerçeklere, düşünceli analizlere ve güvenilir bilgiye değer veren kitlelerle buluşun.\n\nSponsorluk fırsatları hakkında daha fazla bilgi için BalVoi.com'u ziyaret edin.\n\nBalVoi:30. Haberlerdeki dengeli ses.",
+      "Markanız neyi temsil ediyor?\n\nBilgi fazlalığının, artan kutuplaşmanın ve azalan güvenin yaşandığı bir dünyada, tüketiciler şeffaflık, güven ve hesap verebilirlik değerlerini benimseyen kuruluşları giderek daha fazla desteklemektedir.\n\nBalVoi:30, NewsGenie teknolojisiyle desteklenen ve güvenilir bilgi ile bilinçli kitlelere odaklanan çok dilli küresel bir haber ağı inşa etmektedir.\n\nMisyon sahibi markaları bize katılmaya davet ediyoruz.\n\nKuruluşunuz teknolojinin ayrışmayı değil anlayışı güçlendirmesi gerektiğine ve güvenin eylemlerle kazanıldığına inanıyorsa, sizinle konuşmak isteriz.\n\nSponsorluk fırsatları hakkında daha fazla bilgi için BalVoi.com'u ziyaret edin.\n\nBalVoi:30. Bağlantılı bir dünya için güvenilir bilgi.",
+      "Yapay zekâ, dünyanın bilgiyi üretme, dağıtma ve tüketme biçimini değiştiriyor.\n\nSoru, yapay zekânın geleceği şekillendirip şekillendirmeyeceği değildir.\n\nSoru, bunu nasıl yapacağıdır.\n\nBalVoi:30; yapay zekânın şeffaflığı artırmak, anlayışı geliştirmek ve kamu güvenini güçlendirmek için sorumlu bir şekilde kullanılabileceğine inanan kuruluşlarla iş birliği yapmaktadır.\n\nÇok dilli bilgi ağımız Kuzey Amerika, Latin Amerika, Avrupa, Orta Doğu ve Avrasya'daki kitlelere ulaşmaktadır.\n\nKuruluşunuz amaç odaklı inovasyona inanıyorsa, sizinle tanışmak isteriz.\n\nBalVoi:30.\n\nKüresel erişim. Güvenilir bilgi. Sorumlu yapay zekâ."
+    ]
+  },
+  "thank_you": {
+    "en": [
+      "Thank you for listening.",
+      "Thank you for joining us today.",
+      "Thank you for spending part of your day with us.",
+      "We appreciate you listening.",
+      "Thank you for tuning in.",
+      "Thank you for being with us.",
+      "Thanks for following today's news with BalVoi.",
+      "We appreciate your time and attention.",
+      "Thank you for choosing BalVoi.",
+      "Until next time, thank you for listening."
+    ],
+    "es": [
+      "Gracias por escuchar.",
+      "Gracias por acompañarnos hoy.",
+      "Gracias por dedicar parte de su día a estar con nosotros.",
+      "Agradecemos su sintonía.",
+      "Gracias por escucharnos.",
+      "Gracias por acompañarnos.",
+      "Gracias por seguir las noticias de hoy con BalVoi.",
+      "Agradecemos su tiempo y atención.",
+      "Gracias por elegir BalVoi.",
+      "Hasta la próxima, gracias por escuchar."
+    ],
+    "pt": [
+      "Obrigado por ouvir.",
+      "Obrigado por nos acompanhar hoje.",
+      "Obrigado por dedicar parte do seu dia a nós.",
+      "Agradecemos sua audiência.",
+      "Obrigado por estar conosco.",
+      "Obrigado por acompanhar as notícias de hoje.",
+      "Obrigado por acompanhar a BalVoi.",
+      "Agradecemos seu tempo e atenção.",
+      "Obrigado por escolher a BalVoi.",
+      "Até a próxima, obrigado por ouvir."
+    ],
+    "fr": [
+      "Merci de votre écoute.",
+      "Merci de nous avoir accompagnés aujourd'hui.",
+      "Merci d'avoir passé une partie de votre journée avec nous.",
+      "Nous vous remercions de votre fidélité.",
+      "Merci de nous avoir suivis.",
+      "Merci d'être restés avec nous.",
+      "Merci d'avoir suivi l'actualité avec BalVoi.",
+      "Nous apprécions votre attention.",
+      "Merci d'avoir choisi BalVoi.",
+      "À bientôt, et merci de votre écoute."
+    ],
+    "de": [
+      "Vielen Dank fürs Zuhören.",
+      "Vielen Dank, dass Sie heute dabei waren.",
+      "Vielen Dank, dass Sie einen Teil Ihres Tages mit uns verbracht haben.",
+      "Wir danken Ihnen für Ihr Interesse.",
+      "Vielen Dank fürs Einschalten.",
+      "Danke, dass Sie bei uns waren.",
+      "Vielen Dank, dass Sie die Nachrichten mit BalVoi verfolgt haben.",
+      "Wir schätzen Ihre Zeit und Aufmerksamkeit.",
+      "Vielen Dank, dass Sie sich für BalVoi entschieden haben.",
+      "Bis zum nächsten Mal und vielen Dank fürs Zuhören."
+    ],
+    "ar": [
+      "شكرًا لاستماعكم.",
+      "شكرًا لانضمامكم إلينا اليوم.",
+      "شكرًا لتخصيص جزء من وقتكم لمتابعتنا.",
+      "نقدّر متابعتكم لنا.",
+      "شكرًا لإصغائكم.",
+      "شكرًا لوجودكم معنا.",
+      "شكرًا لمتابعتكم أخبار اليوم مع BalVoi.",
+      "نقدّر وقتكم واهتمامكم.",
+      "شكرًا لاختياركم BalVoi.",
+      "إلى اللقاء، وشكرًا لاستماعكم."
+    ],
+    "ru": [
+      "Спасибо за внимание.",
+      "Спасибо, что были с нами сегодня.",
+      "Спасибо, что уделили нам часть своего дня.",
+      "Мы благодарим вас за внимание к нашему выпуску.",
+      "Спасибо, что слушали нас.",
+      "Спасибо, что оставались с нами.",
+      "Спасибо, что следили за новостями вместе с BalVoi.",
+      "Мы ценим ваше время и внимание.",
+      "Спасибо, что выбрали BalVoi.",
+      "До новых встреч и спасибо за внимание."
+    ],
+    "tr": [
+      "Dinlediğiniz için teşekkür ederiz.",
+      "Bugün bize katıldığınız için teşekkür ederiz.",
+      "Gününüzün bir bölümünü bizimle geçirdiğiniz için teşekkür ederiz.",
+      "Bizi takip ettiğiniz için teşekkürler.",
+      "Bizi dinlediğiniz için teşekkür ederiz.",
+      "Bizimle olduğunuz için teşekkür ederiz.",
+      "Bugünün haberlerini BalVoi ile takip ettiğiniz için teşekkür ederiz.",
+      "Zamanınız ve ilginiz için teşekkür ederiz.",
+      "BalVoi'yi tercih ettiğiniz için teşekkür ederiz.",
+      "Bir sonraki yayında görüşmek üzere, teşekkür ederiz."
+    ]
+  }
+}

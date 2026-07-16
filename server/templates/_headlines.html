@@ -1,0 +1,16 @@
+{% if episode.headlines %}
+<section class="headline-grid-section">
+  <div class="section-head">
+    <h2>In this episode</h2>
+    <span>{{ episode.headlines | length }} stories</span>
+  </div>
+  <div class="headline-grid">
+    {% for h in episode.headlines %}
+    <article class="headline-card">
+      <span class="headline-num">{{ "%02d" | format(loop.index) }}</span>
+      <p>{{ h }}</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}

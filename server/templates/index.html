@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block title %}{{ brand.name }} — {{ brand.tagline }}{% endblock %} {% block content %}
+<section class="home-hero">
+  <h2>{{ brand.subtitle }}</h2>
+  <p>Eight editions. Same hour, eight newsrooms — assembled and voiced automatically, twice an hour.</p>
+</section>
+
+<section class="history-section">
+  <div class="section-head">
+    <h2>Editions</h2>
+    <span>{{ overview | length }} feeds</span>
+  </div>
+  <div class="edition-index">
+    {% for row in overview %}
+    <a
+      class="edition-index-card"
+      href="/{{ row.edition.slug }}"
+      style="border-left-color: {{ row.edition.colors.primary }}"
+    >
+      <p class="ei-kicker">{{ row.edition.editionName }}</p>
+      <h3>{{ row.edition.name.replace('BalVoi:30 ', '') }}</h3>
+      <p>{{ row.edition.city }} · {{ row.edition.sourceCountries | length }} countries</p>
+      <p class="ei-meta">
+        {% if row.latest %}Latest: {{ row.latest.timestamp | datetime }} · {{ row.latest.durationSeconds | duration }}{% else %}No episodes yet{% endif %}
+      </p>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,4 @@
+{% extends "base.html" %} {% block title %}{{ episode.editionName }} — {{ episode.timestamp }}{% endblock %} {% block content %}
+<a class="back-link" href="/{{ episode.slug }}">← {{ episode.editionName }}</a>
+
+{% include "_player.html" %} {% include "_headlines.html" %} {% endblock %}

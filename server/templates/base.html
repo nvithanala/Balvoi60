@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="{{ active_slug | default('en') }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{{ brand.name }} — {{ brand.subtitle }}{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Libre+Franklin:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    {% block head %}{% endblock %}
+  </head>
+  <body>
+    <div
+      class="page"
+      style="--primary: {{ theme.primary }}; --secondary: {{ theme.secondary }}; --accent: {{ theme.accent }}"
+    >
+      <div class="container">
+        <header class="site-header">
+          <div class="masthead-brand">
+            <a class="logo-mark" href="/"><span class="logo-core">30</span></a>
+            <div class="site-header-text">
+              <p class="brand">{{ brand.name }}</p>
+              <h1 class="site-title"><a href="/">{{ brand.tagline }}</a></h1>
+              <p class="subtitle">{{ brand.subtitle }}</p>
+            </div>
+          </div>
+          <div class="live-badge"><span class="live-dot"></span> On air — every 30 min</div>
+        </header>
+
+        <nav class="edition-picker">
+          <p class="picker-label">Editions</p>
+          <div class="lang-tabs">
+            {% for e in editions %}
+            <a
+              class="lang-tab{% if e.slug == active_slug %} active{% endif %}"
+              href="/{{ e.slug }}"
+              title="{{ e.editionName }} — {{ e.city }}"
+              >{{ e.name.replace('BalVoi:30 ', '') }}</a
+            >
+            {% endfor %}
+          </div>
+        </nav>
+
+        {% block content %}{% endblock %}
+      </div>
+
+      <footer class="site-footer">
+        <p>{{ brand.name }} — Powered by NewsGenie — Bias-free news every thirty minutes</p>
+      </footer>
+    </div>
+  </body>
+</html>

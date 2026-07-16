@@ -1,0 +1,319 @@
+{
+  "masterBrand": {
+    "name": "BalVoi:30",
+    "tagline": "The Global Podcast Network",
+    "subtitle": "World News Every 30 Minutes",
+    "designNote": "ONE master brand look. Color variations per market. NO FLAGS. Simple modification of BalVoi current logo."
+  },
+  "productionCadence": {
+    "triggersUtc": ["HH:25", "HH:55"],
+    "description": "Two cycles per hour at :25 and :55; each covers stories from preceding 30 minutes",
+    "processingBudgetMinutes": 25
+  },
+  "editions": [
+    {
+      "id": "balvoi30-en",
+      "slug": "en",
+      "name": "BalVoi:30 News",
+      "editionName": "Five Eyes Edition",
+      "language": "English",
+      "locale": "en-US",
+      "city": "New York City",
+      "timezone": "America/New_York",
+      "sourceCountries": ["United States of America", "Canada", "United Kingdom", "Australia", "New Zealand", "China", "Russia", "Ukraine", "Germany", "France", "India", "Japan", "Israel", "Iran"],
+      "colors": {
+        "primary": "#0A3D91",
+        "secondary": "#C0C7D1",
+        "accent": "#152238"
+      },
+      "contentFolder": "English",
+      "fileSuffix": "EN",
+      "voiceShifts": [
+        {
+          "start": "00:01",
+          "end": "08:00",
+          "primary": { "name": "Madison Ray", "voiceId": "FyrYFW3P9GUxA348YGWu" },
+          "secondary": { "name": "Elena Hart", "voiceId": null }
+        },
+        {
+          "start": "08:01",
+          "end": "16:00",
+          "primary": { "name": "Grant Whitman", "voiceId": "wLoW00IP5kfH8oiOBAPp" },
+          "secondary": { "name": "Nolan Pierce", "voiceId": null }
+        },
+        {
+          "start": "16:01",
+          "end": "24:00",
+          "primary": { "name": "Sarah", "voiceId": "gJU2icYQsdEmbGJ65Z8W" },
+          "secondary": { "name": "Claire Rowan", "voiceId": null }
+        }
+      ]
+    },
+    {
+      "id": "balvoi30-es",
+      "slug": "es",
+      "name": "BalVoi:30 Noticias",
+      "editionName": "Edición Latinoamérica",
+      "language": "Spanish",
+      "locale": "es-MX",
+      "city": "Mexico City",
+      "timezone": "America/Mexico_City",
+      "sourceCountries": ["Mexico", "Argentina", "Colombia", "Chile", "Peru", "Ecuador", "Uruguay", "Paraguay", "Costa Rica", "Panama", "Dominican Republic", "Guatemala", "Honduras", "El Salvador", "Nicaragua", "Bolivia", "Spain", "United States of America", "Brazil", "China", "Russia", "Ukraine", "Germany", "France"],
+      "colors": {
+        "primary": "#C62828",
+        "secondary": "#D4A017",
+        "accent": "#2D2D2D"
+      },
+      "contentFolder": "Spanish",
+      "fileSuffix": "ES",
+      "voiceShifts": [
+        {
+          "start": "00:01",
+          "end": "08:00",
+          "primary": { "name": "Alonso", "voiceId": "HMMu0XoIm7ib2e6V02E3" },
+          "secondary": { "name": "Mateo Serrano", "voiceId": null }
+        },
+        {
+          "start": "08:01",
+          "end": "16:00",
+          "primary": { "name": "Mila", "voiceId": "0uHpKhb0ymsdvmCtPV8y" },
+          "secondary": { "name": "Camila Varela", "voiceId": null }
+        },
+        {
+          "start": "16:01",
+          "end": "24:00",
+          "primary": { "name": "Ruben Suarez", "voiceId": "rp876bky8TK6Abie5pir" },
+          "secondary": { "name": "Daniel Rivas", "voiceId": null }
+        }
+      ]
+    },
+    {
+      "id": "balvoi30-pt",
+      "slug": "pt",
+      "name": "BalVoi:30 Notícias",
+      "editionName": "Edição Brasil",
+      "language": "Portuguese",
+      "locale": "pt-BR",
+      "city": "São Paulo",
+      "timezone": "America/Sao_Paulo",
+      "sourceCountries": ["Brazil", "Portugal", "Angola", "Mozambique", "Cape Verde", "Guinea-Bissau", "São Tomé and Príncipe", "Timor-Leste", "Argentina", "United States of America", "China", "Russia", "Ukraine", "Germany", "France", "United Kingdom", "Japan"],
+      "colors": {
+        "primary": "#008F5A",
+        "secondary": "#BFA34A",
+        "accent": "#1E3A34"
+      },
+      "contentFolder": "Portuguese",
+      "fileSuffix": "PT",
+      "voiceShifts": [
+        {
+          "start": "00:01",
+          "end": "08:00",
+          "primary": { "name": "Daiana Candido", "voiceId": "nHNZWlqUWtEKPr3hhFQP" },
+          "secondary": { "name": "Marina Duarte", "voiceId": null }
+        },
+        {
+          "start": "08:01",
+          "end": "16:00",
+          "primary": { "name": "Lax", "voiceId": "tS45q0QcrDHqHoaWdCDR" },
+          "secondary": { "name": "Rafael Monteiro", "voiceId": null }
+        },
+        {
+          "start": "16:01",
+          "end": "24:00",
+          "primary": { "name": "Russell", "voiceId": "NYC9WEgkq1u4jiqBseQ9" },
+          "secondary": { "name": "Caio Neves", "voiceId": null }
+        }
+      ]
+    },
+    {
+      "id": "balvoi30-fr",
+      "slug": "fr",
+      "name": "BalVoi:30 Actualités",
+      "editionName": "Édition du Monde Francophone",
+      "language": "French",
+      "locale": "fr-FR",
+      "city": "Paris",
+      "timezone": "Europe/Paris",
+      "sourceCountries": ["France", "Belgium", "Switzerland", "Luxembourg", "Canada", "Senegal", "Côte d'Ivoire", "Morocco", "Tunisia", "Algeria", "Cameroon", "Democratic Republic of the Congo", "Benin", "Burkina Faso", "Chad", "Niger", "United States of America", "Germany", "United Kingdom", "China", "Russia", "Ukraine"],
+      "colors": {
+        "primary": "#102A5C",
+        "secondary": "#C9A44C",
+        "accent": "#4A5568"
+      },
+      "contentFolder": "French",
+      "fileSuffix": "FR",
+      "voiceShifts": [
+        {
+          "start": "00:01",
+          "end": "08:00",
+          "primary": { "name": "Lawrence", "voiceId": "EIdfNdxb4fnsE39tEAB1" },
+          "secondary": { "name": "Amélie Laurent", "voiceId": null }
+        },
+        {
+          "start": "08:01",
+          "end": "16:00",
+          "primary": { "name": "Xavier", "voiceId": "sH2x8ewMTSa5QBBr0dGb" },
+          "secondary": { "name": "Julien Moreau", "voiceId": null }
+        },
+        {
+          "start": "16:01",
+          "end": "24:00",
+          "primary": { "name": "Genevieve", "voiceId": "mlIQEcTmPRMIHZApujDD" },
+          "secondary": { "name": "Claire Delorme", "voiceId": null }
+        }
+      ]
+    },
+    {
+      "id": "balvoi30-de",
+      "slug": "de",
+      "name": "BalVoi:30 Weltnachrichten",
+      "editionName": "Mitteleuropa-Ausgabe",
+      "language": "German",
+      "locale": "de-DE",
+      "city": "Berlin",
+      "timezone": "Europe/Berlin",
+      "sourceCountries": ["Germany", "Austria", "Switzerland", "Liechtenstein", "Luxembourg", "Netherlands", "Belgium", "Czech Republic", "Poland", "France", "Italy", "United Kingdom", "United States of America", "China", "Russia", "Ukraine", "Israel"],
+      "colors": {
+        "primary": "#232323",
+        "secondary": "#B22222",
+        "accent": "#6C757D"
+      },
+      "contentFolder": "German",
+      "fileSuffix": "GE",
+      "voiceShifts": [
+        {
+          "start": "00:01",
+          "end": "08:00",
+          "primary": { "name": "Hans-Peter Lorenz", "voiceId": "MLFHn2hZ3zKifXrugl26" },
+          "secondary": { "name": "Adrian Falk", "voiceId": null }
+        },
+        {
+          "start": "08:01",
+          "end": "16:00",
+          "primary": { "name": "Doreen", "voiceId": "mDRP1h6KfUD1XAUJxqr0" },
+          "secondary": { "name": "Lina Vogt", "voiceId": null }
+        },
+        {
+          "start": "16:01",
+          "end": "24:00",
+          "primary": { "name": "Wolfgang", "voiceId": "aZQ0ZrBshbMCU6TJwtuk" },
+          "secondary": { "name": "Jonas Hartmann", "voiceId": null }
+        }
+      ]
+    },
+    {
+      "id": "balvoi30-ar",
+      "slug": "ar",
+      "name": "BalVoi:30 أخبار",
+      "editionName": "إصدار الشرق الأوسط",
+      "language": "Arabic",
+      "locale": "ar",
+      "city": "Dubai",
+      "timezone": "Asia/Dubai",
+      "sourceCountries": ["Saudi Arabia", "United Arab Emirates", "Qatar", "Kuwait", "Bahrain", "Oman", "Egypt", "Jordan", "Lebanon", "Iraq", "Syria", "Palestine", "Morocco", "Algeria", "Tunisia", "Libya", "Israel", "Iran", "Turkey", "United States of America", "China", "Russia", "Ukraine"],
+      "colors": {
+        "primary": "#006D77",
+        "secondary": "#D4AF37",
+        "accent": "#0B1F3A"
+      },
+      "contentFolder": "Arabic",
+      "fileSuffix": "AR",
+      "voiceShifts": [
+        {
+          "start": "00:01",
+          "end": "08:00",
+          "primary": { "name": "Sana", "voiceId": "mRdG9GYEjJmIzqbYTidv" },
+          "secondary": { "name": "Lina Rahal", "voiceId": null }
+        },
+        {
+          "start": "08:01",
+          "end": "16:00",
+          "primary": { "name": "Jawad", "voiceId": "JoySr0ZYKEotnyhsN3Fi" },
+          "secondary": { "name": "Karim Nasser", "voiceId": null }
+        },
+        {
+          "start": "16:01",
+          "end": "24:00",
+          "primary": { "name": "Saud", "voiceId": "3nav5pHC1EYvWOd5LmnA" },
+          "secondary": { "name": "Sami Haddad", "voiceId": null }
+        }
+      ]
+    },
+    {
+      "id": "balvoi30-ru",
+      "slug": "ru",
+      "name": "BalVoi:30 Новости",
+      "editionName": "Издание «Россия и Евразия»",
+      "language": "Russian",
+      "locale": "ru-RU",
+      "city": "Riga",
+      "timezone": "Europe/Riga",
+      "sourceCountries": ["Russia", "Belarus", "Kazakhstan", "Armenia", "Azerbaijan", "Georgia", "Kyrgyzstan", "Uzbekistan", "Tajikistan", "Moldova", "Ukraine", "China", "Turkey", "Germany", "France", "United Kingdom", "United States of America", "India"],
+      "colors": {
+        "primary": "#5AA7E8",
+        "secondary": "#B7C1CC",
+        "accent": "#2C3E50"
+      },
+      "contentFolder": "Russian",
+      "fileSuffix": "RU",
+      "voiceShifts": [
+        {
+          "start": "00:01",
+          "end": "08:00",
+          "primary": { "name": "Serji Shu", "voiceId": "TU2w9J6yEyVkPB7HKH2g" },
+          "secondary": { "name": "Alexei Morozov", "voiceId": null }
+        },
+        {
+          "start": "08:01",
+          "end": "16:00",
+          "primary": { "name": "Markus", "voiceId": "ZHIn0jcgR6VIvVAXkwWV" },
+          "secondary": { "name": "Dmitri Volkov", "voiceId": null }
+        },
+        {
+          "start": "16:01",
+          "end": "24:00",
+          "primary": { "name": "Rina", "voiceId": "ycbyWsnf4hqZgdpKHqiU" },
+          "secondary": { "name": "Svetlana Orlova", "voiceId": null }
+        }
+      ]
+    },
+    {
+      "id": "balvoi30-tr",
+      "slug": "tr",
+      "name": "BalVoi:30 Haberler",
+      "editionName": "Türkiye ve Kafkasya Sürümü",
+      "language": "Turkish",
+      "locale": "tr-TR",
+      "city": "Istanbul",
+      "timezone": "Europe/Istanbul",
+      "sourceCountries": ["Turkey", "Azerbaijan", "Georgia", "Armenia", "Cyprus", "Kazakhstan", "Uzbekistan", "Kyrgyzstan", "Turkmenistan", "Russia", "Ukraine", "Iran", "Iraq", "Syria", "Germany", "United States of America", "China", "Israel"],
+      "colors": {
+        "primary": "#008C95",
+        "secondary": "#B87333",
+        "accent": "#2F3437"
+      },
+      "contentFolder": "Turkish",
+      "fileSuffix": "TU",
+      "voiceShifts": [
+        {
+          "start": "00:01",
+          "end": "08:00",
+          "primary": { "name": "Ercan Celik", "voiceId": "ZuSBYwJvg6VObnEdTzuA" },
+          "secondary": { "name": "Emre Arslan", "voiceId": null }
+        },
+        {
+          "start": "08:01",
+          "end": "16:00",
+          "primary": { "name": "Nazli", "voiceId": "I8PntRGWO35zIGM4lnWO" },
+          "secondary": { "name": "Dilara Aydin", "voiceId": null }
+        },
+        {
+          "start": "16:01",
+          "end": "24:00",
+          "primary": { "name": "Ridvan Elitez", "voiceId": "5XC4RBgBhLodsuvdmKNN" },
+          "secondary": { "name": "Elif Demir", "voiceId": null }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,183 @@
+{
+  "balvoi30-en": {
+    "ad_1": [
+      "English/Ad 1/Ad 1_1_EN.mp3",
+      "English/Ad 1/Ad 1_2_EN.mp3",
+      "English/Ad 1/Ad 1_3_EN.mp3"
+    ],
+    "ad_2": [
+      "English/Ad 2/Ad 2_1_EN.mp3",
+      "English/Ad 2/Ad 2_2_EN.mp3",
+      "English/Ad 2/Ad 2_3_EN.mp3"
+    ],
+    "right_back": [
+      "English/Right Back/Right_Back_01_EN.mp3",
+      "English/Right Back/Right_Back_02_EN.mp3",
+      "English/Right Back/Right_Back_03_EN.mp3",
+      "English/Right Back/Right_Back_04_EN.mp3",
+      "English/Right Back/Right_Back_05_EN.mp3",
+      "English/Right Back/Right_Back_06_EN.mp3",
+      "English/Right Back/Right_Back_07_EN.mp3",
+      "English/Right Back/Right_Back_08_EN.mp3",
+      "English/Right Back/Right_Back_09_EN.mp3",
+      "English/Right Back/Right_Back_10_EN.mp3"
+    ]
+  },
+  "balvoi30-es": {
+    "ad_1": [
+      "Spanish/Ad 1/Ad 1_1_ES.mp3",
+      "Spanish/Ad 1/Ad 1_2_ES.mp3",
+      "Spanish/Ad 1/Ad 1_3_ES.mp3"
+    ],
+    "ad_2": [
+      "Spanish/Ad 2/Ad 2_1_ES.mp3",
+      "Spanish/Ad 2/Ad 2_2_ES.mp3",
+      "Spanish/Ad 2/Ad 2_3_ES.mp3"
+    ],
+    "right_back": [
+      "Spanish/Right Back/Right Back_01_ES.mp3",
+      "Spanish/Right Back/Right Back_02_ES.mp3",
+      "Spanish/Right Back/Right Back_03_ES.mp3",
+      "Spanish/Right Back/Right Back_04_ES.mp3",
+      "Spanish/Right Back/Right Back_05_ES.mp3",
+      "Spanish/Right Back/Right Back_06_ES.mp3",
+      "Spanish/Right Back/Right Back_07_ES.mp3",
+      "Spanish/Right Back/Right Back_08_ES.mp3",
+      "Spanish/Right Back/Right Back_09_ES.mp3",
+      "Spanish/Right Back/Right Back_10_ES.mp3"
+    ]
+  },
+  "balvoi30-pt": {
+    "ad_1": [
+      "Portuguese/Ad 1/Ad 1_1_PT.mp3",
+      "Portuguese/Ad 1/Ad 1_2_PT.mp3",
+      "Portuguese/Ad 1/Ad 1_3_PT.mp3"
+    ],
+    "ad_2": [
+      "Portuguese/Ad 2/Ad 2_1_PT.mp3",
+      "Portuguese/Ad 2/Ad 2_2_PT.mp3",
+      "Portuguese/Ad 2/Ad 2_3_PT.mp3"
+    ],
+    "right_back": [
+      "Portuguese/Right Back/Right Back_01_PT.mp3",
+      "Portuguese/Right Back/Right Back_02_PT.mp3",
+      "Portuguese/Right Back/Right Back_03_PT.mp3",
+      "Portuguese/Right Back/Right Back_04_PT.mp3",
+      "Portuguese/Right Back/Right Back_05_PT.mp3",
+      "Portuguese/Right Back/Right Back_06_PT.mp3",
+      "Portuguese/Right Back/Right Back_07_PT.mp3",
+      "Portuguese/Right Back/Right Back_08_PT.mp3",
+      "Portuguese/Right Back/Right Back_09_PT.mp3",
+      "Portuguese/Right Back/Right Back_10_PT.mp3"
+    ]
+  },
+  "balvoi30-fr": {
+    "ad_1": [
+      "French/Ad 1/Ad 1_1_FR.mp3",
+      "French/Ad 1/Ad 1_2_FR.mp3",
+      "French/Ad 1/Ad 1_3_FR.mp3"
+    ],
+    "ad_2": [
+      "French/Ad 2/Ad 2_1_FR.mp3",
+      "French/Ad 2/Ad 2_2_FR.mp3",
+      "French/Ad 2/Ad 2_3_FR.mp3"
+    ],
+    "right_back": [
+      "French/Right Back/Right Back_01_FR.mp3",
+      "French/Right Back/Right Back_02_FR.mp3",
+      "French/Right Back/Right Back_03_FR.mp3",
+      "French/Right Back/Right Back_04_FR.mp3",
+      "French/Right Back/Right Back_05_FR.mp3",
+      "French/Right Back/Right Back_06_FR.mp3",
+      "French/Right Back/Right Back_07_FR.mp3",
+      "French/Right Back/Right Back_08_FR.mp3",
+      "French/Right Back/Right Back_09_FR.mp3",
+      "French/Right Back/Right Back_10_FR.mp3"
+    ]
+  },
+  "balvoi30-de": {
+    "ad_1": [
+      "German/Ad 1/Ad 1_1_GE.mp3",
+      "German/Ad 1/Ad 1_2_GE.mp3",
+      "German/Ad 1/Ad 1_3_GE.mp3"
+    ],
+    "ad_2": [
+      "German/Ad 2/Ad 2_1_GE.mp3",
+      "German/Ad 2/Ad 2_2_GE.mp3",
+      "German/Ad 2/Ad 2_3_GE.mp3"
+    ],
+    "right_back": [
+      "German/Right Back/Right Back_01_GE.mp3",
+      "German/Right Back/Right Back_02_GE.mp3",
+      "German/Right Back/Right Back_03_GE.mp3",
+      "German/Right Back/Right Back_04_GE.mp3",
+      "German/Right Back/Right Back_05_GE.mp3",
+      "German/Right Back/Right Back_06_GE.mp3",
+      "German/Right Back/Right Back_07_GE.mp3",
+      "German/Right Back/Right Back_08_GE.mp3",
+      "German/Right Back/Right Back_09_GE.mp3",
+      "German/Right Back/Right Back_10_GE.mp3"
+    ]
+  },
+  "balvoi30-ar": {
+    "ad_1": [
+      "Arabic/Ad 1/Ad 1_1_AR.mp3",
+      "Arabic/Ad 1/Ad 1_2_AR.mp3",
+      "Arabic/Ad 1/Ad 1_3_AR.mp3"
+    ],
+    "ad_2": [
+      "Arabic/Ad 2/Ad 2_1_AR.mp3",
+      "Arabic/Ad 2/Ad 2_2_AR.mp3",
+      "Arabic/Ad 2/Ad 2_3_AR.mp3"
+    ],
+    "right_back": [
+      "Arabic/Right Back/Right_Back_01_AR.mp3",
+      "Arabic/Right Back/Right_Back_02_AR.mp3",
+      "Arabic/Right Back/Right_Back_03_AR.mp3",
+      "Arabic/Right Back/Right_Back_04_AR.mp3",
+      "Arabic/Right Back/Right_Back_05_AR.mp3",
+      "Arabic/Right Back/Right_Back_06_AR.mp3",
+      "Arabic/Right Back/Right_Back_07_AR.mp3",
+      "Arabic/Right Back/Right_Back_08_AR.mp3",
+      "Arabic/Right Back/Right_Back_09_AR.mp3",
+      "Arabic/Right Back/Right_Back_10_AR.mp3"
+    ]
+  },
+  "balvoi30-ru": {
+    "ad_1": [
+      "Russian/Ad 1/Ad 1_1_RU.mp3",
+      "Russian/Ad 1/Ad 1_2_RU.mp3",
+      "Russian/Ad 1/Ad 1_3_RU.mp3"
+    ],
+    "ad_2": [
+      "Russian/Ad 2/Ad 2_1_RU.mp3",
+      "Russian/Ad 2/Ad 2_2_RU.mp3",
+      "Russian/Ad 2/Ad 2_3_RU.mp3"
+    ],
+    "right_back": [
+      "Russian/Right Back/Right Back_01_RU.mp3",
+      "Russian/Right Back/Right Back_02_RU.mp3",
+      "Russian/Right Back/Right Back_03_RU.mp3",
+      "Russian/Right Back/Right Back_04_RU.mp3",
+      "Russian/Right Back/Right Back_05_RU.mp3",
+      "Russian/Right Back/Right Back_06_RU.mp3",
+      "Russian/Right Back/Right Back_07_RU.mp3",
+      "Russian/Right Back/Right Back_08_RU.mp3",
+      "Russian/Right Back/Right Back_09_RU.mp3",
+      "Russian/Right Back/Right Back_10_RU.mp3"
+    ]
+  },
+  "balvoi30-tr": {
+    "ad_1": [
+      "Turkish/Ad 1/Ad 1_1_TU.mp3",
+      "Turkish/Ad 1/Ad 1_2_TU.mp3",
+      "Turkish/Ad 1/Ad 1_3_TU.mp3"
+    ],
+    "ad_2": [
+      "Turkish/Ad 2/Ad 2_1_TU.mp3",
+      "Turkish/Ad 2/Ad 2_2_TU.mp3",
+      "Turkish/Ad 2/Ad 2_3_TU.mp3"
+    ],
+    "right_back": []
+  }
+}

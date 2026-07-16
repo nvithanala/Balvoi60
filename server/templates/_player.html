@@ -1,0 +1,24 @@
+<section class="player-card">
+  <div class="player-card-inner">
+    <div class="player-top">
+      <div>
+        <p class="brand">{{ episode.name }}</p>
+        <h2 class="edition-title">{{ episode.editionName }}</h2>
+        <p class="edition-city">{{ episode.city }}</p>
+      </div>
+      <div class="duration-chip">{{ episode.durationSeconds | duration }}</div>
+    </div>
+
+    <audio controls preload="metadata" class="native-audio" src="{{ episode.audioUrl }}">
+      Your browser does not support audio playback.
+    </audio>
+
+    <div class="meta">
+      <span>{{ episode.timestamp | datetime }}</span>
+      {% if episode.anchor %}
+      <span class="meta-sep">·</span>
+      <span>Anchor: {{ episode.anchor }}</span>
+      {% endif %}
+    </div>
+  </div>
+</section>
