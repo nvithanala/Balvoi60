@@ -9,7 +9,12 @@ from html import unescape
 
 import requests
 
-from balvoi.dates import format_iso_utc, parse_any_datetime, parse_iso_datetime, previous_podcast_boundary
+from balvoi.dates import (
+    format_iso_utc,
+    parse_any_datetime,
+    parse_iso_datetime,
+    previous_podcast_boundary,
+)
 
 DEFAULT_API_BASE = "https://api.staging.newsgenie.ai"
 DEFAULT_ARTICLE_LIMIT = 200

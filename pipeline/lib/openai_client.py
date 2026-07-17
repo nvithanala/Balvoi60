@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+
 import requests
 
 from balvoi.config import is_english

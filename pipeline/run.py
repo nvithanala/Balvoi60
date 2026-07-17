@@ -17,7 +17,7 @@ from balvoi.paths import ROOT, pipeline_lock, storage_root
 
 load_dotenv(ROOT / ".env", override=True)
 
-from pipeline.config_loader import edition_by_slug, editions, ensure_storage
+from pipeline.config_loader import edition_by_slug, ensure_storage
 from pipeline.lib.duration_budget import MAX_EPISODE_SECONDS, budget_summary
 from pipeline.lib.story_history import recently_used_story_ids
 from pipeline.stages.assemble_episode import assemble_episode
