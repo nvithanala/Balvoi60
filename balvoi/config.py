@@ -42,7 +42,7 @@ def edition_by_slug(slug: str) -> dict | None:
 def master_brand() -> dict:
     brand = load_editions_doc().get("masterBrand", {})
     return {
-        "name": brand.get("name", "BalVoi:30"),
+        "name": brand.get("name", "BalVoi:60"),
         "tagline": brand.get("tagline", "The Global Podcast Network"),
-        "subtitle": brand.get("subtitle", "World News Every 30 Minutes"),
+        "subtitle": brand.get("subtitle", "World News Every 60 Minutes"),
     }

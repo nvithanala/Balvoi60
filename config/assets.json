@@ -1,5 +1,5 @@
 {
-  "balvoi30-en": {
+  "balvoi60-en": {
     "ad_1": [
       "English/Ad 1/Ad 1_1_EN.mp3",
       "English/Ad 1/Ad 1_2_EN.mp3",
@@ -23,7 +23,7 @@
       "English/Right Back/Right_Back_10_EN.mp3"
     ]
   },
-  "balvoi30-es": {
+  "balvoi60-es": {
     "ad_1": [
       "Spanish/Ad 1/Ad 1_1_ES.mp3",
       "Spanish/Ad 1/Ad 1_2_ES.mp3",
@@ -47,7 +47,7 @@
       "Spanish/Right Back/Right Back_10_ES.mp3"
     ]
   },
-  "balvoi30-pt": {
+  "balvoi60-pt": {
     "ad_1": [
       "Portuguese/Ad 1/Ad 1_1_PT.mp3",
       "Portuguese/Ad 1/Ad 1_2_PT.mp3",
@@ -71,7 +71,7 @@
       "Portuguese/Right Back/Right Back_10_PT.mp3"
     ]
   },
-  "balvoi30-fr": {
+  "balvoi60-fr": {
     "ad_1": [
       "French/Ad 1/Ad 1_1_FR.mp3",
       "French/Ad 1/Ad 1_2_FR.mp3",
@@ -95,7 +95,7 @@
       "French/Right Back/Right Back_10_FR.mp3"
     ]
   },
-  "balvoi30-de": {
+  "balvoi60-de": {
     "ad_1": [
       "German/Ad 1/Ad 1_1_GE.mp3",
       "German/Ad 1/Ad 1_2_GE.mp3",
@@ -119,7 +119,7 @@
       "German/Right Back/Right Back_10_GE.mp3"
     ]
   },
-  "balvoi30-ar": {
+  "balvoi60-ar": {
     "ad_1": [
       "Arabic/Ad 1/Ad 1_1_AR.mp3",
       "Arabic/Ad 1/Ad 1_2_AR.mp3",
@@ -143,7 +143,7 @@
       "Arabic/Right Back/Right_Back_10_AR.mp3"
     ]
   },
-  "balvoi30-ru": {
+  "balvoi60-ru": {
     "ad_1": [
       "Russian/Ad 1/Ad 1_1_RU.mp3",
       "Russian/Ad 1/Ad 1_2_RU.mp3",
@@ -167,7 +167,7 @@
       "Russian/Right Back/Right Back_10_RU.mp3"
     ]
   },
-  "balvoi30-tr": {
+  "balvoi60-tr": {
     "ad_1": [
       "Turkish/Ad 1/Ad 1_1_TU.mp3",
       "Turkish/Ad 1/Ad 1_2_TU.mp3",

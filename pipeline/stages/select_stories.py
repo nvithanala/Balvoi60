@@ -1,4 +1,4 @@
-"""Select and rank stories to fill episode duration budget without truncating text."""
+"""Select one ordered story set for every language in an hourly publication."""
 
 from __future__ import annotations
 
@@ -6,15 +6,6 @@ from datetime import UTC, datetime
 
 from balvoi.countries import article_countries, matches_edition
 from balvoi.dates import article_publish_timestamp
-from pipeline.lib.duration_budget import (
-    budget_summary,
-    estimate_spoken_seconds,
-    fixed_overhead_seconds,
-)
-
-# Hard ceiling: stop selecting before the episode estimate would exceed ~35 minutes.
-HARD_CEILING_SECONDS = 35 * 60
-STORY_TRANSITION_SECONDS = 3
 
 
 def _decision_row(
@@ -79,10 +70,13 @@ def _scope_by_country(
 def select_stories(
     articles: list[dict],
     edition_id: str,
-    since_minutes: int = 30,
+    since_minutes: int = 60,
     exclude_ids: set[str] | None = None,
     source_countries: list[str] | None = None,
     record: list | None = None,
+    *,
+    window_start: datetime | None = None,
+    window_end_exclusive: datetime | None = None,
 ) -> list[dict]:
     if not articles:
         return []
@@ -95,8 +89,18 @@ def select_stories(
     exclusion_reason: dict[str, str | None] = dict(country_reason_by_id)
     selected_ids: set[str] = set()
 
-    now = datetime.now(UTC).timestamp()
-    cutoff = now - since_minutes * 60
+    del edition_id
+    now = datetime.now(UTC)
+    start_ts = (
+        window_start.astimezone(UTC).timestamp()
+        if window_start
+        else now.timestamp() - since_minutes * 60
+    )
+    end_ts = (
+        window_end_exclusive.astimezone(UTC).timestamp()
+        if window_end_exclusive
+        else now.timestamp()
+    )
 
     fresh = [a for a in country_scoped if str(a.get("id")) not in exclude_ids]
     if exclude_ids:
@@ -108,23 +112,13 @@ def select_stories(
                 if article_id in exclude_ids and article_id not in exclusion_reason:
                     exclusion_reason[article_id] = "cooldown"
 
-    if not fresh:
-        print("  [select] all stories aired recently — allowing repeats this cycle")
-        fresh = country_scoped
-        for article_id in list(exclusion_reason.keys()):
-            if exclusion_reason[article_id] == "cooldown":
-                del exclusion_reason[article_id]
-
-    in_window = [a for a in fresh if article_publish_timestamp(a) >= cutoff]
-    pool = in_window if in_window else fresh
-    window_active = bool(in_window)
-
-    if window_active:
-        in_window_ids = {str(a["id"]) for a in in_window}
-        for article in fresh:
-            article_id = str(article["id"])
-            if article_id not in in_window_ids and article_id not in exclusion_reason:
-                exclusion_reason[article_id] = "out_of_window"
+    in_window = [a for a in fresh if start_ts <= article_publish_timestamp(a) < end_ts]
+    pool = in_window
+    in_window_ids = {str(a["id"]) for a in in_window}
+    for article in fresh:
+        article_id = str(article["id"])
+        if article_id not in in_window_ids and article_id not in exclusion_reason:
+            exclusion_reason[article_id] = "out_of_window"
 
     breaking = [a for a in pool if a.get("breaking")]
     non_breaking = [a for a in pool if not a.get("breaking")]
@@ -137,35 +131,16 @@ def select_stories(
         print(f"  [select] {len(breaking)} breaking + {len(non_breaking)} other in pool")
     else:
         ranked = non_breaking
-        print(f"  [select] no breaking news — using {len(ranked)} latest articles (last {since_minutes}m)")
+        print(f"  [select] no breaking news — using {len(ranked)} stories in ownership window")
 
-    fixed = fixed_overhead_seconds(edition_id, headline_count=10)
-    selected: list[dict] = []
-    used_story_seconds = 0
-
-    for idx, article in enumerate(ranked):
+    selected = []
+    for article in ranked:
         article_id = str(article["id"])
-        est = estimate_spoken_seconds(str(article.get("fullText") or ""))
-        transitions = len(selected) * STORY_TRANSITION_SECONDS
-        total_if_added = fixed + used_story_seconds + est + transitions
-
-        if selected and total_if_added > HARD_CEILING_SECONDS:
-            for rest in ranked[idx:]:
-                rest_id = str(rest["id"])
-                if rest_id not in selected_ids and rest_id not in exclusion_reason:
-                    exclusion_reason[rest_id] = "budget_full"
-            break
-
+        if article_id in selected_ids:
+            continue
         selected.append(article)
         selected_ids.add(article_id)
-        used_story_seconds += est
-
-    summary = budget_summary(edition_id, len(selected))
-    print(
-        f"  [select] {len(selected)} stories | "
-        f"~{summary['secondsPerStory']}s/story | "
-        f"est. {summary['estimatedTotalMinutes']} min episode"
-    )
+    print(f"  [select] {len(selected)} unique stories selected")
 
     if record is not None:
         for article in articles:

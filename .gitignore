@@ -26,6 +26,10 @@ storage/cache/
 storage/episodes/*
 storage/manifests/*
 storage/articles/*
+storage/audio_assets/
+storage/previews/
+storage/locks/
+storage/seen-articles.json
 !storage/episodes/.gitkeep
 !storage/manifests/.gitkeep
 !storage/articles/.gitkeep
@@ -48,14 +52,13 @@ Turkish/
 # Scratch / dump files
 _spec_extract.txt
 _xlsx_dump.txt
-script_dump.txt
-pipeline.zip
 inspect_script.py
 inspect_selected.py
+script_dump.txt
+pipeline.zip
 
-# Leftover frontend deps (Python-only now)
+# Legacy frontend (Python-only stack)
 web/
-node_modules/
 
 # OS / editor cruft
 .DS_Store
@@ -71,3 +74,4 @@ storage/logs/
 
 # Keep config source spreadsheet (overrides *.xlsx above)
 !BalVoi_30 Content.xlsx
+!BalVoi_60 Content.xlsx

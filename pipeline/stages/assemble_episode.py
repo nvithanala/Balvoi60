@@ -20,22 +20,23 @@ SEGMENT_KEY_MAP = {
 }
 
 
-def _intro_text(edition: dict, slug: str, voice: dict) -> str:
-    segs = segments()
-    welcome = segs["welcome"][slug][0] if segs["welcome"].get(slug) else ""
+def _dynamic_intro_text(
+    edition: dict,
+    voice: dict,
+    when: datetime | None = None,
+) -> str:
     tz = ZoneInfo(edition["timezone"])
-    now = datetime.now(tz)
+    local = (when or datetime.now(tz)).astimezone(tz)
     tmpl = episode_template()["introTemplate"]["dynamicSuffix"]
-    dynamic = tmpl.format(
-        time=now.strftime("%I:%M %p").lstrip("0"),
+    return tmpl.format(
+        time=local.strftime("%I:%M %p").lstrip("0"),
         city=edition["city"],
-        day=now.strftime("%d").lstrip("0"),
-        month=now.strftime("%B"),
-        year=now.strftime("%Y"),
+        day=local.strftime("%d").lstrip("0"),
+        month=local.strftime("%B"),
+        year=local.strftime("%Y"),
         anchorName=voice["name"],
         editionName=edition["editionName"],
     )
-    return f"{welcome} {dynamic}".strip()
 
 
 def _split_stories(stories: list[dict], blocks: int = 3) -> list[list[dict]]:
@@ -58,9 +59,11 @@ def assemble_episode(
     stories: list[dict],
     run_id: str,
     headlines_text: str | None = None,
+    *,
+    when: datetime | None = None,
 ) -> dict:
     slug = edition["slug"]
-    voice = get_voice_for_edition(edition)
+    voice = get_voice_for_edition(edition, when=when)
     edition_assets = assets()[edition["id"]]
     segs = segments()
     story_blocks = _split_stories(stories, 3)
@@ -68,16 +71,24 @@ def assemble_episode(
     manifest_segments: list[dict] = []
     picks: dict[str, int] = {}
 
-    def add_tts(seg_type: str, text: str, sheet: str | None = None, variant: int | None = None):
-        manifest_segments.append(
-            {
-                "type": "tts",
-                "segmentType": seg_type,
-                "text": text,
-                "sheet": sheet,
-                "variant": variant,
-            }
-        )
+    def add_tts(
+        seg_type: str,
+        text: str,
+        sheet: str | None = None,
+        variant: int | None = None,
+        *,
+        reusable: bool = False,
+    ):
+        entry: dict = {
+            "type": "tts",
+            "segmentType": seg_type,
+            "text": text,
+            "sheet": sheet,
+            "variant": variant,
+        }
+        if reusable:
+            entry["reusable"] = True
+        manifest_segments.append(entry)
 
     def add_audio(seg_type: str, path: str, sheet: str, variant: int):
         manifest_segments.append(
@@ -90,7 +101,19 @@ def assemble_episode(
             }
         )
 
-    add_tts("intro", _intro_text(edition, slug, voice), "welcome", 0)
+    welcome = segs["welcome"][slug][0] if segs["welcome"].get(slug) else ""
+    if welcome.strip():
+        add_tts(
+            "intro_welcome",
+            welcome.strip(),
+            "welcome",
+            0,
+            reusable=True,
+        )
+    dynamic = _dynamic_intro_text(edition, voice, when=when)
+    if dynamic.strip():
+        # Time/city/anchor — never reusable-cached.
+        add_tts("intro_dynamic", dynamic.strip(), "welcome", 0)
 
     headlines = headlines_text or " ".join(s.get("primer", "") for s in stories[:10])
     if headlines.strip():
@@ -120,20 +143,34 @@ def assemble_episode(
                 picks[f"{stype}"] = variant
                 add_audio(stype, path, key, variant)
             elif key == "right_back" and segs["right_back"].get(slug):
+                # Localized TTS fallback only when no prerecorded asset is configured.
                 variant, text = pick_variant(segs["right_back"][slug], run_id, f"{slug}:{stype}")
                 picks[f"{stype}"] = variant
-                add_tts(stype, text, key, variant)
+                add_tts(
+                    stype,
+                    text,
+                    key,
+                    variant,
+                    reusable=True,
+                )
             continue
 
         pool = segs.get(key, {}).get(slug, [])
         if pool:
             variant, text = pick_variant(pool, run_id, f"{slug}:{stype}")
             picks[f"{stype}"] = variant
-            add_tts(stype, text, key, variant)
+            add_tts(
+                stype,
+                text,
+                key,
+                variant,
+                reusable=True,
+            )
 
     return {
         "editionId": edition["id"],
         "slug": slug,
+        "language": edition.get("language", slug),
         "voice": voice,
         "segments": manifest_segments,
         "picks": picks,

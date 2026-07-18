@@ -3,9 +3,9 @@ from __future__ import annotations
 from datetime import UTC, datetime
 
 SAMPLE_EDITION = {
-    "id": "balvoi30-en",
+    "id": "balvoi60-en",
     "slug": "en",
-    "name": "BalVoi:30 News",
+    "name": "BalVoi:60 News",
     "editionName": "Five Eyes Edition",
     "locale": "en-US",
     "city": "New York City",
@@ -29,13 +29,16 @@ def article(
     publish_offset_seconds: int = 0,
     breaking: bool = False,
     summary: str = "word " * 200,
+    full_text: str | None = None,
     fixed_now: datetime | None = None,
 ) -> dict:
     base = fixed_now or datetime(2026, 6, 16, 12, 0, 0, tzinfo=UTC)
+    body = full_text if full_text is not None else summary
     return {
         "id": article_id,
         "title": f"Story {article_id}",
         "summary": summary,
+        "fullText": body,
         "breaking": breaking,
         "publishTimestamp": base.timestamp() + publish_offset_seconds,
     }

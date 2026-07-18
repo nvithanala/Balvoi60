@@ -1,8 +1,5 @@
 {
-  "targetDurationMinutes": 30,
-  "maxDurationMinutes": 30,
-  "targetEpisodeSeconds": 1680,
-  "maxEpisodeSeconds": 1800,
+  "minimumPublishDurationSeconds": 600,
   "wordsPerMinute": 150,
   "storyBlocks": 3,
   "targetLoudnessLufs": -16,

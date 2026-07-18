@@ -1,4 +1,4 @@
-"""BalVoi:30 Flask service — podcast feeds, server-rendered pages, audio."""
+"""BalVoi:60 Flask service — podcast feeds, server-rendered pages, audio."""
 
 from __future__ import annotations
 
@@ -20,6 +20,8 @@ from flask import (
     request,
     send_from_directory,
 )
+
+from pipeline.lib.config_validation import scheduler_enabled
 
 from . import data
 from .feed import build_feed
@@ -70,7 +72,9 @@ def create_app() -> Flask:
         if not edition:
             abort(404)
         latest = data.latest_for(slug)
-        recent = [e for e in data.history_for(slug) if not latest or e.get("id") != latest.get("id")]
+        recent = [
+            e for e in data.history_for(slug) if not latest or e.get("id") != latest.get("id")
+        ]
         return render_template(
             "edition.html",
             edition=edition,
@@ -99,8 +103,20 @@ def create_app() -> Flask:
         edition = data.edition_by_slug(slug)
         if not edition:
             abort(404)
-        episodes = data.history_for(slug)
-        xml = build_feed(edition, episodes, _base_url(), data.audio_size)
+        episodes = data.history_for_feed(slug)
+        artwork_base = os.environ.get("PODCAST_ARTWORK_BASE_URL", "").rstrip("/")
+        artwork_url = edition.get("artworkUrl") or (
+            f"{artwork_base}/{slug}.jpg" if artwork_base else ""
+        )
+        xml = build_feed(
+            edition,
+            episodes,
+            _base_url(),
+            data.audio_size,
+            owner_name=os.environ.get("PODCAST_OWNER_NAME", "BalVoi:60"),
+            owner_email=os.environ.get("PODCAST_OWNER_EMAIL", ""),
+            artwork_url=artwork_url,
+        )
         return Response(xml, mimetype="application/rss+xml")
 
     @app.route("/episodes/<path:subpath>")
@@ -120,12 +136,12 @@ def create_app() -> Flask:
 
 def main() -> None:
     app = create_app()
-    if os.environ.get("SCHEDULER_ENABLED", "").lower() == "true":
+    if scheduler_enabled():
         from .scheduler import start_scheduler
 
         start_scheduler()
     port = int(os.environ.get("PORT", "3001"))
-    print(f"BalVoi:30 server http://localhost:{port}")
+    print(f"BalVoi:60 server http://localhost:{port}")
     app.run(host="0.0.0.0", port=port)
 
 

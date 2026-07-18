@@ -1,8 +1,8 @@
-# BalVoi:30
+# BalVoi:60
 
-A little radio station that never sleeps. Every half hour it grabs the latest world news, rewrites it like a real anchor would read it, runs it through eight language editions, stitches in the ads, and hands you a finished ~30-minute episode. No human in the loop.
+A little radio station that never sleeps. Every hour it grabs the latest world news, rewrites it like a real anchor would read it, runs it through eight language editions, stitches in the ads, and hands you a finished episode. No human in the loop.
 
-Two production runs an hour, at **:25** and **:55**, each covering whatever broke in the previous 30 minutes.
+One production run an hour, covering whatever broke in the previous **60 minutes**.
 
 It's a podcast, not an app — so the whole thing is **Python**: a pipeline that produces episodes, and a small Flask service that publishes them as standard RSS feeds (subscribe in any podcast player) plus a few plain server-rendered pages.
 
@@ -23,7 +23,7 @@ Same brand, different voice per market. No flags, just colors. Each edition also
 | `ru` | Россия и Евразия | Russian | Riga | `/feed/ru.xml` |
 | `tr` | Türkiye ve Kafkasya | Turkish | Istanbul | `/feed/tr.xml` |
 
-Each edition rotates through three anchor voices over the run, so a 30-minute episode doesn't feel like one robot talking at you for half an hour.
+Each edition rotates through three anchor voices over the run, so an episode doesn't feel like one robot talking at you the whole time.
 
 ## Getting it running
 
@@ -55,13 +55,17 @@ Then open:
 
 ### Producing episodes on a schedule
 
-The pipeline runs at **:25** and **:55** when you start the server with the scheduler enabled:
+The canonical scheduler **processes at UTC :51** and **publishes at the next
+:00**. A run started at 10:51 UTC freezes the article window and builds all
+languages for the 11:00 UTC publication boundary:
 
 ```powershell
 $env:SCHEDULER_ENABLED = "true"; python -m server
 ```
 
-Or run the scheduler on its own: `python -m server.scheduler`. Either way it skips a cycle if a run is already in progress (`storage/.pipeline.lock`).
+Or run the scheduler on its own: `python -m server.scheduler`. Atomic
+boundary/language locks prevent scheduled and manual runs from publishing the
+same edition twice.
 
 You can also just run the pipeline by hand: `python -m pipeline --editions en` (one edition) or leave `--editions` off to do all eight. Console scripts `balvoi-pipeline` and `balvoi-server` are available after `pip install -e .`.
 
@@ -104,30 +108,23 @@ docs/          project notes (e.g. the Python-only migration)
 Every cycle runs the same six steps (see `pipeline/run.py` if you want the gory details):
 
 1. **Fetch** — pull the latest articles from the NewsGenie API.
-2. **Select** — breaking news first, then anything from the last 30 minutes. If the window's empty, fall back to the latest available.
+2. **Select once** — freeze one ordered story set for all languages from the
+   hourly ownership window. A publication at 11:00 UTC owns `[09:51, 10:51)`.
+   Processing begins at 10:51 so the window can close before fetch.
 3. **Transform** — OpenAI rewrites each story in newscaster voice (English base), then localizes/translates per edition.
 4. **Assemble** — build the 13-segment episode: intro, headlines, stories, ad breaks, outro.
 5. **Synthesize + merge** — ElevenLabs does the TTS, ffmpeg merges it with the pre-rendered ads.
-6. **Publish** — write the MP3 and manifest into `storage/`.
+6. **Publish** — at the `:00` publication boundary, write validated MP3/manifest
+   metadata and upload ready languages independently (failures do not block others).
 
 The `server/` then reads those manifests to build each edition's RSS feed and pages — it never touches the pipeline directly except to trigger it on schedule.
 
-## Staying under 30 minutes
+## Runtime publication rule
 
-The whole thing is budgeted to land **under 30 minutes**. Roughly:
-
-| Component | ~Duration |
-|-----------|-----------|
-| Intro + dynamic city/time | ~55s |
-| Headlines | ~45–90s |
-| Fillers (transitions, welcome-backs, outro) | ~35s |
-| Ad break 1 (right back + Ad 1 + welcome back) | ~45s |
-| Ad break 2 (right back + Ad 2 + welcome back) | ~60s |
-| **Fixed overhead** | **~4 min** |
-| **Stories** (9–10 × ~2.5 min) | **~24 min** |
-| **Total** | **~28 min** |
-
-If a finished episode somehow blows past the 30-minute cap, the pipeline warns you so you can trim the story count or tighten the scripts.
+BalVoi:60 describes the hourly cadence, not episode length. There is no target
+or maximum runtime. An edition is publishable only when its merged audio is at
+least 600 seconds (`MIN_PUBLISH_DURATION_SECONDS`). The selector never repeats
+stories or adds filler to reach that threshold.
 
 ## Configuration
 
@@ -144,16 +141,25 @@ ELEVENLABS_API_KEY=...
 PORT=3001
 STORAGE_PATH=storage                       # shared by pipeline, server, and scheduler
 PUBLIC_BASE_URL=https://your-host        # used for absolute feed/enclosure URLs
-SCHEDULER_ENABLED=true                    # run the pipeline at :25 and :55
-PIPELINE_EDITIONS=en                      # editions the scheduler produces
+SCHEDULER_ENABLED=true                    # process at UTC :51; publish at next :00
+PIPELINE_EDITIONS=en,es,pt,fr,de,ar,ru,tr
+BALVOI_ARTICLE_WINDOW_MINUTES=60          # fixed hourly ownership width
+MIN_PUBLISH_DURATION_SECONDS=600
+LANGUAGE_WORKER_CONCURRENCY=4
+TRANSLATION_CONCURRENCY=4
+TTS_REQUEST_CONCURRENCY=3
+MERGE_CONCURRENCY=2
 ```
 
 A few things worth knowing:
 
 - Articles come from the **NewsGenie API engine** (`api.staging.newsgenie.ai`, MongoDB-backed). The public BalVoi site URL is only used for story links and as a scrape fallback.
 - Default article endpoint is `GET /articles` with an `X-Api-Token: <domain JWT>` header. If yours lives somewhere else, set `BALVOI_API_ARTICLES_PATH`.
-- The 30-minute lookback window is tunable via `BALVOI_ARTICLE_WINDOW_MINUTES`.
-- Stories that aired in a recent cycle are skipped so episodes don't repeat. The cooldown is tunable via `BALVOI_STORY_COOLDOWN_MINUTES` (default `360` = 6 hours; set to `0` to allow repeats). If every available story is still on cooldown, the pipeline allows repeats for that one cycle rather than producing an empty episode.
+- The article ownership window is exactly 60 minutes and gap-free. The
+  environment value is validated as `60`.
+- Stories that aired recently are skipped. The cooldown is tunable via
+  `BALVOI_STORY_COOLDOWN_MINUTES` (default `360`; `0` disables the historical
+  exclusion). The pipeline does not relax cooldown to fill an episode.
 - `STORAGE_PATH` sets where episodes, manifests, cache, and the pipeline lock file live. Pipeline, server, and scheduler all read the same value.
 - No API keys handy? Run the pipeline with `--dry-run` (or `DRY_RUN=true`) and the synth step is skipped so you can still exercise everything else.
 - `PUBLIC_BASE_URL` should be set in production so podcast players get absolute MP3 URLs; locally it falls back to the request host.

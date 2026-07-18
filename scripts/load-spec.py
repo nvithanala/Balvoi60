@@ -1,15 +1,20 @@
 #!/usr/bin/env python3
-"""Parse BalVoi_30 Content.xlsx and scan pre-rendered audio folders → config JSON."""
+"""Parse BalVoi_60 Content.xlsx and scan pre-rendered audio folders → config JSON."""
 
 from __future__ import annotations
 
+import argparse
 import json
+import os
+import warnings
+from pathlib import Path
 
 import openpyxl
 
 from balvoi.paths import ROOT
 
-XLSX = ROOT / "BalVoi_30 Content.xlsx"
+DEFAULT_XLSX = ROOT / "BalVoi_60 Content.xlsx"
+LEGACY_XLSX = ROOT / "BalVoi_30 Content.xlsx"
 CONFIG = ROOT / "config"
 EDITIONS = CONFIG / "editions.json"
 
@@ -40,11 +45,10 @@ def load_editions() -> list[dict]:
     return json.loads(EDITIONS.read_text(encoding="utf-8"))["editions"]
 
 
-def parse_xlsx_segments() -> dict:
-    wb = openpyxl.load_workbook(XLSX, data_only=True)
+def parse_xlsx_segments(xlsx: Path) -> dict:
+    wb = openpyxl.load_workbook(xlsx, data_only=True)
     segments: dict[str, dict[str, list[str]]] = {
-        key: {slug: [] for _, slug in SHEET_LANG_COLUMNS}
-        for key in SHEET_TO_KEY.values()
+        key: {slug: [] for _, slug in SHEET_LANG_COLUMNS} for key in SHEET_TO_KEY.values()
     }
 
     slug_by_header_prefix = {}
@@ -98,11 +102,29 @@ def find_mp3_assets(edition: dict) -> dict:
 
 
 def main() -> None:
-    if not XLSX.exists():
-        raise SystemExit(f"Missing {XLSX}")
+    parser = argparse.ArgumentParser(description="Generate config from BalVoi content workbook")
+    parser.add_argument(
+        "--xlsx",
+        default=os.environ.get("BALVOI_CONTENT_XLSX", ""),
+        help="Content workbook path (default: BalVoi_60 Content.xlsx)",
+    )
+    args = parser.parse_args()
+    xlsx = Path(args.xlsx) if args.xlsx else DEFAULT_XLSX
+    if not xlsx.is_absolute():
+        xlsx = ROOT / xlsx
+    if not xlsx.exists() and not args.xlsx and LEGACY_XLSX.exists():
+        warnings.warn(
+            "Using legacy BalVoi_30 Content.xlsx; rename it to BalVoi_60 Content.xlsx "
+            "or pass --xlsx explicitly",
+            DeprecationWarning,
+            stacklevel=1,
+        )
+        xlsx = LEGACY_XLSX
+    if not xlsx.exists():
+        raise SystemExit(f"Missing content workbook: {xlsx}")
 
     editions = load_editions()
-    segments = parse_xlsx_segments()
+    segments = parse_xlsx_segments(xlsx)
 
     assets_by_edition = {}
     for ed in editions:
@@ -112,9 +134,7 @@ def main() -> None:
     (CONFIG / "segments.json").write_text(
         json.dumps(segments, ensure_ascii=False, indent=2), encoding="utf-8"
     )
-    (CONFIG / "assets.json").write_text(
-        json.dumps(assets_by_edition, indent=2), encoding="utf-8"
-    )
+    (CONFIG / "assets.json").write_text(json.dumps(assets_by_edition, indent=2), encoding="utf-8")
 
     missing = []
     for ed in editions:

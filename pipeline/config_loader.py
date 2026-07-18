@@ -1,4 +1,4 @@
-"""Load BalVoi:30 configuration from config/*.json."""
+"""Load BalVoi:60 configuration from config/*.json."""
 
 from __future__ import annotations
 
@@ -64,5 +64,5 @@ def get_voice_for_edition(edition: dict, when: datetime | None = None) -> dict:
 
 def ensure_storage() -> None:
     root = storage_root()
-    for sub in ("episodes", "manifests", "cache/tts", "logs", "articles"):
+    for sub in ("episodes", "manifests", "cache/tts", "cache/reusable", "logs", "articles"):
         (root / sub).mkdir(parents=True, exist_ok=True)

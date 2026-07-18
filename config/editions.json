@@ -1,20 +1,21 @@
 {
   "masterBrand": {
-    "name": "BalVoi:30",
+    "name": "BalVoi:60",
     "tagline": "The Global Podcast Network",
-    "subtitle": "World News Every 30 Minutes",
+    "subtitle": "World News Every 60 Minutes",
     "designNote": "ONE master brand look. Color variations per market. NO FLAGS. Simple modification of BalVoi current logo."
   },
   "productionCadence": {
-    "triggersUtc": ["HH:25", "HH:55"],
-    "description": "Two cycles per hour at :25 and :55; each covers stories from preceding 30 minutes",
-    "processingBudgetMinutes": 25
+    "processingTriggerUtc": ["HH:51"],
+    "publicationBoundaryUtc": ["HH:00"],
+    "description": "Process at :51 after the ownership window closes; publish validated languages at the next :00",
+    "processingBudgetMinutes": 9
   },
   "editions": [
     {
-      "id": "balvoi30-en",
+      "id": "balvoi60-en",
       "slug": "en",
-      "name": "BalVoi:30 News",
+      "name": "BalVoi:60 News",
       "editionName": "Five Eyes Edition",
       "language": "English",
       "locale": "en-US",
@@ -50,9 +51,9 @@
       ]
     },
     {
-      "id": "balvoi30-es",
+      "id": "balvoi60-es",
       "slug": "es",
-      "name": "BalVoi:30 Noticias",
+      "name": "BalVoi:60 Noticias",
       "editionName": "Edición Latinoamérica",
       "language": "Spanish",
       "locale": "es-MX",
@@ -88,9 +89,9 @@
       ]
     },
     {
-      "id": "balvoi30-pt",
+      "id": "balvoi60-pt",
       "slug": "pt",
-      "name": "BalVoi:30 Notícias",
+      "name": "BalVoi:60 Notícias",
       "editionName": "Edição Brasil",
       "language": "Portuguese",
       "locale": "pt-BR",
@@ -126,9 +127,9 @@
       ]
     },
     {
-      "id": "balvoi30-fr",
+      "id": "balvoi60-fr",
       "slug": "fr",
-      "name": "BalVoi:30 Actualités",
+      "name": "BalVoi:60 Actualités",
       "editionName": "Édition du Monde Francophone",
       "language": "French",
       "locale": "fr-FR",
@@ -164,9 +165,9 @@
       ]
     },
     {
-      "id": "balvoi30-de",
+      "id": "balvoi60-de",
       "slug": "de",
-      "name": "BalVoi:30 Weltnachrichten",
+      "name": "BalVoi:60 Weltnachrichten",
       "editionName": "Mitteleuropa-Ausgabe",
       "language": "German",
       "locale": "de-DE",
@@ -202,9 +203,9 @@
       ]
     },
     {
-      "id": "balvoi30-ar",
+      "id": "balvoi60-ar",
       "slug": "ar",
-      "name": "BalVoi:30 أخبار",
+      "name": "BalVoi:60 أخبار",
       "editionName": "إصدار الشرق الأوسط",
       "language": "Arabic",
       "locale": "ar",
@@ -240,9 +241,9 @@
       ]
     },
     {
-      "id": "balvoi30-ru",
+      "id": "balvoi60-ru",
       "slug": "ru",
-      "name": "BalVoi:30 Новости",
+      "name": "BalVoi:60 Новости",
       "editionName": "Издание «Россия и Евразия»",
       "language": "Russian",
       "locale": "ru-RU",
@@ -278,9 +279,9 @@
       ]
     },
     {
-      "id": "balvoi30-tr",
+      "id": "balvoi60-tr",
       "slug": "tr",
-      "name": "BalVoi:30 Haberler",
+      "name": "BalVoi:60 Haberler",
       "editionName": "Türkiye ve Kafkasya Sürümü",
       "language": "Turkish",
       "locale": "tr-TR",

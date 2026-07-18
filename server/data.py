@@ -17,6 +17,7 @@ __all__ = [
     "episodes_dir",
     "history",
     "history_for",
+    "history_for_feed",
     "latest_for",
     "latest_map",
     "master_brand",
@@ -57,6 +58,11 @@ def latest_for(slug: str) -> dict | None:
 
 def history_for(slug: str) -> list[dict]:
     return [e for e in history() if e.get("slug") == slug]
+
+
+def history_for_feed(slug: str) -> list[dict]:
+    """Return only legacy/current episodes with a real non-empty enclosure."""
+    return [episode for episode in history_for(slug) if audio_size(episode) > 0]
 
 
 def episode_by_id(episode_id: str) -> dict | None:

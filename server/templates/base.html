@@ -21,14 +21,14 @@
       <div class="container">
         <header class="site-header">
           <div class="masthead-brand">
-            <a class="logo-mark" href="/"><span class="logo-core">30</span></a>
+            <a class="logo-mark" href="/"><span class="logo-core">60</span></a>
             <div class="site-header-text">
               <p class="brand">{{ brand.name }}</p>
               <h1 class="site-title"><a href="/">{{ brand.tagline }}</a></h1>
               <p class="subtitle">{{ brand.subtitle }}</p>
             </div>
           </div>
-          <div class="live-badge"><span class="live-dot"></span> On air — every 30 min</div>
+          <div class="live-badge"><span class="live-dot"></span> New edition every hour</div>
         </header>
 
         <nav class="edition-picker">
@@ -39,7 +39,7 @@
               class="lang-tab{% if e.slug == active_slug %} active{% endif %}"
               href="/{{ e.slug }}"
               title="{{ e.editionName }} — {{ e.city }}"
-              >{{ e.name.replace('BalVoi:30 ', '') }}</a
+              >{{ e.name.replace('BalVoi:60 ', '') }}</a
             >
             {% endfor %}
           </div>
@@ -49,7 +49,7 @@
       </div>
 
       <footer class="site-footer">
-        <p>{{ brand.name }} — Powered by NewsGenie — Bias-free news every thirty minutes</p>
+        <p>{{ brand.name }} — Powered by NewsGenie — Bias-free news every sixty minutes</p>
       </footer>
     </div>
   </body>

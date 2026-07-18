@@ -151,7 +151,10 @@ def _resolve_since() -> str:
     return format_iso_utc(previous_podcast_boundary())
 
 
-def fetch_podcast_articles() -> list[dict]:
+def fetch_podcast_articles(
+    window_start: datetime | None = None,
+    window_end_exclusive: datetime | None = None,
+) -> list[dict]:
     """Fetch articles from NewsGenie ``GET /podcast_articles`` for the current cycle window."""
     key = os.environ.get("BALVOI_API_KEY", "").strip()
     if not key:
@@ -160,7 +163,7 @@ def fetch_podcast_articles() -> list[dict]:
     api_base = (os.environ.get("BALVOI_API_URL") or DEFAULT_API_BASE).rstrip("/")
     site_url = (os.environ.get("BALVOI_SITE_URL") or "https://staging.balvoi.com").rstrip("/")
     limit = int(os.environ.get("BALVOI_ARTICLE_LIMIT", str(DEFAULT_ARTICLE_LIMIT)))
-    since = _resolve_since()
+    since = format_iso_utc(window_start) if window_start else _resolve_since()
 
     url = f"{api_base}/podcast_articles"
     headers = {"X-Api-Token": key, "Accept": "application/json"}
@@ -194,4 +197,11 @@ def fetch_podcast_articles() -> list[dict]:
         return []
 
     print(f"  [ok] podcast_articles: {len(items)} articles (since={since})")
-    return [normalize_podcast_article(a, site_url) for a in items if isinstance(a, dict)]
+    normalized = [normalize_podcast_article(a, site_url) for a in items if isinstance(a, dict)]
+    if window_start and window_end_exclusive:
+        start = window_start.timestamp()
+        end = window_end_exclusive.timestamp()
+        normalized = [
+            article for article in normalized if start <= article["publishTimestamp"] < end
+        ]
+    return normalized

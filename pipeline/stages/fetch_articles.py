@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import os
 from datetime import UTC, datetime
+from pathlib import Path
 
 from balvoi.paths import storage_root
 from pipeline.lib.balvoi_api import fetch_podcast_articles
@@ -102,9 +103,14 @@ def _demo_articles() -> list[dict]:
     ]
 
 
-def fetch_articles() -> list[dict]:
+def fetch_articles(
+    window_start: datetime | None = None,
+    window_end_exclusive: datetime | None = None,
+    *,
+    cache_path: os.PathLike[str] | str | None = ARTICLES_CACHE,
+) -> list[dict]:
     """Return normalized articles from NewsGenie podcast_articles API."""
-    articles = fetch_podcast_articles()
+    articles = fetch_podcast_articles(window_start, window_end_exclusive)
     if not articles and _demo_allowed():
         print("  [info] API empty — using demo articles (BALVOI_ALLOW_DEMO_ARTICLES=true)")
         articles = _demo_articles()
@@ -117,7 +123,11 @@ def fetch_articles() -> list[dict]:
         seen.add(a["id"])
         unique.append(a)
 
-    ARTICLES_CACHE.parent.mkdir(parents=True, exist_ok=True)
-    ARTICLES_CACHE.write_text(json.dumps(unique, indent=2, ensure_ascii=False), encoding="utf-8")
+    if cache_path is not None:
+        resolved_cache = Path(cache_path)
+        resolved_cache.parent.mkdir(parents=True, exist_ok=True)
+        resolved_cache.write_text(
+            json.dumps(unique, indent=2, ensure_ascii=False), encoding="utf-8"
+        )
     print(f"  [fetch] {len(unique)} articles available")
     return unique

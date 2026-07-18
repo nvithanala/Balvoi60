@@ -19,6 +19,10 @@ def client(monkeypatch: pytest.MonkeyPatch):
         lambda slug: [SAMPLE_EPISODE] if slug == "en" else [],
     )
     monkeypatch.setattr(
+        "server.data.history_for_feed",
+        lambda slug: [SAMPLE_EPISODE] if slug == "en" else [],
+    )
+    monkeypatch.setattr(
         "server.data.episode_by_id",
         lambda episode_id: SAMPLE_EPISODE if episode_id == SAMPLE_EPISODE["id"] else None,
     )

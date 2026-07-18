@@ -1,4 +1,4 @@
-"""Episode duration budget math — target ~30 min including ads and fillers."""
+"""Audio duration estimation helpers; BalVoi:60 has no target runtime."""
 
 from __future__ import annotations
 
@@ -7,10 +7,8 @@ from pathlib import Path
 from balvoi.paths import ROOT
 from pipeline.config_loader import assets
 
-# Hard cap: episode must stay below 30 minutes
-MAX_EPISODE_SECONDS = 30 * 60
-# Target slightly under cap to absorb TTS variance
-TARGET_EPISODE_SECONDS = 28 * 60
+MIN_PUBLISH_DURATION_SECONDS = 600
+STORY_TRANSITION_SECONDS = 3
 WORDS_PER_MINUTE = 150
 SECONDS_PER_STORY_TARGET = 150  # ~2.5 min broadcast read per story
 STORY_BLOCKS = 3
@@ -21,6 +19,7 @@ def _mp3_duration_estimate(path: Path) -> int:
         return 0
     try:
         from pipeline.stages.merge_audio import duration_seconds
+
         d = duration_seconds(path)
         if d > 0:
             return d
@@ -53,14 +52,13 @@ def fixed_overhead_seconds(edition_id: str, headline_count: int) -> int:
 
 
 def story_budget_seconds(edition_id: str, headline_count: int = 8) -> int:
-    fixed = fixed_overhead_seconds(edition_id, headline_count)
-    return max(600, TARGET_EPISODE_SECONDS - fixed)
+    del edition_id, headline_count
+    return 0
 
 
 def target_story_count(edition_id: str) -> int:
-    budget = story_budget_seconds(edition_id)
-    count = max(STORY_BLOCKS * 2, budget // SECONDS_PER_STORY_TARGET)
-    return min(count, 18)
+    del edition_id
+    return 0
 
 
 def seconds_per_story(edition_id: str, story_count: int) -> int:
@@ -80,14 +78,38 @@ def estimate_spoken_seconds(text: str) -> int:
     return max(1, int(words * 60 / WORDS_PER_MINUTE))
 
 
+def estimate_episode_seconds(
+    edition_id: str,
+    story_texts: list[str],
+    *,
+    headline_count: int = 10,
+) -> int:
+    """Estimate total episode duration from story script texts."""
+    fixed = fixed_overhead_seconds(edition_id, headline_count=min(len(story_texts), headline_count))
+    story_seconds = sum(estimate_spoken_seconds(text) for text in story_texts)
+    transitions = max(0, len(story_texts) - 1) * STORY_TRANSITION_SECONDS
+    return fixed + story_seconds + transitions
+
+
+def fit_stories_to_budget(
+    stories: list[dict],
+    edition_id: str,
+    *,
+    max_seconds: int | None = None,
+    script_key: str = "broadcastScript",
+) -> list[dict]:
+    """Compatibility helper: no stories are trimmed to a target runtime."""
+    del edition_id, max_seconds, script_key
+    return list(stories)
+
+
 def budget_summary(edition_id: str, story_count: int) -> dict:
     fixed = fixed_overhead_seconds(edition_id, min(story_count, 10))
     per_story = seconds_per_story(edition_id, story_count)
     stories_total = per_story * story_count
-    estimated = fixed + stories_total + (max(0, story_count - 1) * 3)
+    estimated = fixed + stories_total + (max(0, story_count - 1) * STORY_TRANSITION_SECONDS)
     return {
-        "maxEpisodeSeconds": MAX_EPISODE_SECONDS,
-        "targetEpisodeSeconds": TARGET_EPISODE_SECONDS,
+        "minimumPublishSeconds": MIN_PUBLISH_DURATION_SECONDS,
         "fixedOverheadSeconds": fixed,
         "storyCount": story_count,
         "secondsPerStory": per_story,

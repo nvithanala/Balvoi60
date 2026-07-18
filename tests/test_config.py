@@ -11,7 +11,7 @@ def test_editions_loads_all_slugs() -> None:
 def test_edition_by_slug_known() -> None:
     edition = config.edition_by_slug("en")
     assert edition is not None
-    assert edition["id"] == "balvoi30-en"
+    assert edition["id"] == "balvoi60-en"
     assert edition["editionName"] == "Five Eyes Edition"
 
 
@@ -22,7 +22,7 @@ def test_edition_by_slug_unknown() -> None:
 
 def test_master_brand_defaults() -> None:
     brand = config.master_brand()
-    assert brand["name"] == "BalVoi:30"
+    assert brand["name"] == "BalVoi:60"
     assert brand["tagline"]
     assert brand["subtitle"]
 
@@ -46,4 +46,4 @@ def test_server_data_reexports() -> None:
 
     assert len(data.editions()) == 8
     assert data.edition_by_slug("de")["slug"] == "de"
-    assert data.master_brand()["name"] == "BalVoi:30"
+    assert data.master_brand()["name"] == "BalVoi:60"
