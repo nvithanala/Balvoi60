@@ -20,8 +20,8 @@ from balvoi.paths import ROOT
 load_dotenv(ROOT / ".env", override=True)
 
 from pipeline.config_loader import assets, editions, segments  # noqa: E402
-from pipeline.lib.elevenlabs_client import synthesize  # noqa: E402
 from pipeline.lib import reusable_audio_cache as cache  # noqa: E402
+from pipeline.lib.elevenlabs_client import synthesize  # noqa: E402
 
 
 def _jobs(

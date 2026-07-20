@@ -1,12 +1,4 @@
-from __future__ import annotations
-
-from datetime import UTC, datetime
-from types import SimpleNamespace
-
-from server import scheduler
-
-
-def test_scheduler_triggers_at_processing_minute() -> None:
+from __future__ import annotationsfrom datetime import UTC, datetimefrom types import SimpleNamespacefrom server import schedulerdef test_scheduler_triggers_at_processing_minute() -> None:
     assert scheduler.TRIGGER_MINUTE == 51
     assert scheduler.TRIGGER_MINUTE == scheduler.PROCESSING_TRIGGER_MINUTE
 

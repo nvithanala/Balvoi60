@@ -18,8 +18,7 @@ from balvoi.dates import article_ownership_window, format_iso_utc
 from balvoi.paths import storage_root
 from pipeline.config_loader import edition_by_slug
 from pipeline.errors import AudioValidationError, LocalizationError, MergeError
-from pipeline.lib import concurrency
-from pipeline.lib import elevenlabs_client, openai_client
+from pipeline.lib import concurrency, elevenlabs_client, openai_client
 from pipeline.lib.story_history import recently_used_story_ids
 from pipeline.stages.assemble_episode import assemble_episode
 from pipeline.stages.fetch_articles import fetch_articles

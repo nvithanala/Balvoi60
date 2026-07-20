@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 import time as time_module
+from collections.abc import Callable
 from datetime import UTC, datetime, timedelta
 from email.utils import format_datetime
-from typing import Any, Callable
+from typing import Any
 
 PROCESSING_TRIGGER_MINUTE = 51
 
