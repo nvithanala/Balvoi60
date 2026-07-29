@@ -55,8 +55,8 @@ def test_assemble_episode_uses_publication_boundary_for_voice() -> None:
 
 def test_preview_manifest_hash_is_stable() -> None:
     boundary = datetime(2026, 7, 17, 11, 0, tzinfo=UTC)
-    window_start = datetime(2026, 7, 17, 9, 51, tzinfo=UTC)
-    window_end = datetime(2026, 7, 17, 10, 51, tzinfo=UTC)
+    window_start = datetime(2026, 7, 17, 9, 45, tzinfo=UTC)
+    window_end = datetime(2026, 7, 17, 10, 45, tzinfo=UTC)
     selected = [
         {
             "id": "story-1",
@@ -108,7 +108,7 @@ def test_preview_run_rejects_megaphone_enabled(
     monkeypatch.setenv("MEGAPHONE_ENABLED", "true")
     monkeypatch.setenv("SCHEDULER_ENABLED", "false")
     monkeypatch.setenv("CRON_ENABLED", "false")
-    monkeypatch.setenv("OPENAI_API_KEY", "test-key")
+    monkeypatch.setenv("BALVOI_API_KEY", "test-key")
     with pytest.raises(RuntimeError, match="MEGAPHONE_ENABLED"):
         preview.run_preview(
             run_id="preview-unsafe",
@@ -125,17 +125,18 @@ def test_preview_run_rejects_megaphone_enabled(
         )
 
 
-def test_preview_run_rejects_missing_openai_key(
+def test_preview_run_rejects_missing_balvoi_api_key(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     monkeypatch.setenv("STORAGE_PATH", str(tmp_path))
     monkeypatch.setenv("MEGAPHONE_ENABLED", "false")
     monkeypatch.setenv("SCHEDULER_ENABLED", "false")
     monkeypatch.setenv("CRON_ENABLED", "false")
+    monkeypatch.delenv("BALVOI_API_KEY", raising=False)
     monkeypatch.delenv("OPENAI_API_KEY", raising=False)
-    with pytest.raises(RuntimeError, match="OPENAI_API_KEY"):
+    with pytest.raises(RuntimeError, match="BALVOI_API_KEY"):
         preview.run_preview(
-            run_id="preview-no-openai",
+            run_id="preview-no-bedrock-key",
             boundary=datetime(2026, 7, 17, 11, 0, tzinfo=UTC),
             edition_slugs=["en"],
             settings={

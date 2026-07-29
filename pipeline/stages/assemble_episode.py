@@ -25,14 +25,26 @@ def _dynamic_intro_text(
     voice: dict,
     when: datetime | None = None,
 ) -> str:
+    """Build the time/city intro in the edition language (never English for non-English)."""
     tz = ZoneInfo(edition["timezone"])
     local = (when or datetime.now(tz)).astimezone(tz)
-    tmpl = episode_template()["introTemplate"]["dynamicSuffix"]
+    slug = str(edition.get("slug") or "en")
+    intro = episode_template()["introTemplate"]
+    templates = intro.get("dynamicSuffixBySlug") or {}
+    tmpl = templates.get(slug) or intro["dynamicSuffix"]
+    months = (intro.get("monthNamesBySlug") or {}).get(slug) or (
+        intro.get("monthNamesBySlug") or {}
+    ).get("en")
+    month = months[local.month - 1] if months else local.strftime("%B")
+    if slug == "en":
+        time_text = local.strftime("%I:%M %p").lstrip("0")
+    else:
+        time_text = local.strftime("%H:%M")
     return tmpl.format(
-        time=local.strftime("%I:%M %p").lstrip("0"),
+        time=time_text,
         city=edition["city"],
-        day=local.strftime("%d").lstrip("0"),
-        month=local.strftime("%B"),
+        day=str(local.day),
+        month=month,
         year=local.strftime("%Y"),
         anchorName=voice["name"],
         editionName=edition["editionName"],
@@ -112,8 +124,8 @@ def assemble_episode(
         )
     dynamic = _dynamic_intro_text(edition, voice, when=when)
     if dynamic.strip():
-        # Time/city/anchor — never reusable-cached.
-        add_tts("intro_dynamic", dynamic.strip(), "welcome", 0)
+        # Time/city/anchor — never reusable-cached; language must match the edition.
+        add_tts("intro_dynamic", dynamic.strip(), "intro_dynamic", 0)
 
     headlines = headlines_text or " ".join(s.get("primer", "") for s in stories[:10])
     if headlines.strip():

@@ -1,4 +1,4 @@
-﻿# Secrets / environment
+# Secrets / environment
 .env
 .env.local
 *.env
@@ -75,3 +75,8 @@ storage/logs/
 # Keep config source spreadsheet (overrides *.xlsx above)
 !BalVoi_30 Content.xlsx
 !BalVoi_60 Content.xlsx
+
+
+
+# Local archives (kept on disk, never collected by pytest)
+_archived/

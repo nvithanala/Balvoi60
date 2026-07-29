@@ -11,7 +11,8 @@ def _article_body(article: dict) -> str:
 
 
 def transform_stories_english(articles: list[dict], edition_id: str) -> list[dict]:
-    out = []
+    del edition_id
+    out: list[dict] = []
     for article in articles:
         body = _article_body(article)
         if not body:
@@ -19,6 +20,7 @@ def transform_stories_english(articles: list[dict], edition_id: str) -> list[dic
             continue
 
         title = str(article.get("title") or "Untitled")
+        # Title fallback first; batch rewrite may replace primers below.
         primer = openai_client.story_primer(title, body)
         out.append(
             {
@@ -27,6 +29,19 @@ def transform_stories_english(articles: list[dict], edition_id: str) -> list[dic
                 "primer": primer,
             }
         )
+
+    if not out:
+        return out
+
+    mapped = openai_client.generate_batch_headlines(out)
+    if mapped is None:
+        # Keep title primers — never partially remap on a failed batch.
+        return out
+
+    for story in out:
+        story_id = openai_client.stable_story_id(story)
+        if story_id and story_id in mapped:
+            story["primer"] = mapped[story_id]
     return out
 
 
@@ -48,5 +63,8 @@ def localize_stories(english_stories: list[dict], language: str) -> list[dict]:
     return out
 
 
-def headlines_segment(stories: list[dict]) -> str:
-    return openai_client.batch_headline_intro([s["primer"] for s in stories[:10]])
+def headlines_segment(stories: list[dict], language: str = "English") -> str:
+    return openai_client.batch_headline_intro(
+        [s["primer"] for s in stories[:10]],
+        language=language,
+    )

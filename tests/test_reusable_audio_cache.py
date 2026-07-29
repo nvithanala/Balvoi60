@@ -111,6 +111,19 @@ def test_save_and_lookup_hit(storage: Path) -> None:
     assert meta["cache_key"] == cache.compute_cache_key(payload)
     assert meta["model_id"] == MODEL_ID
     assert meta["text"] == "Welcome back."
+    assert meta["text_hash"] == cache.payload_text_hash(payload)
+
+
+def test_sidecar_metadata_mismatch_is_cache_miss(storage: Path) -> None:
+    payload = _payload()
+    path = cache.save_cached_audio(payload, b"\xff\xfb fake mp3")
+    sidecar = path.with_suffix(".json")
+    meta = json.loads(sidecar.read_text(encoding="utf-8"))
+    meta["voice_id"] = "tampered-voice"
+    meta["text_hash"] = "deadbeef"
+    sidecar.write_text(json.dumps(meta), encoding="utf-8")
+    assert cache.lookup(payload) is None
+    assert not cache.metadata_matches_payload(meta, payload)
 
 
 def test_primary_anchors_include_all_shifts_skip_null_secondary() -> None:

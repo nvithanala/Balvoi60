@@ -6,10 +6,10 @@
     "designNote": "ONE master brand look. Color variations per market. NO FLAGS. Simple modification of BalVoi current logo."
   },
   "productionCadence": {
-    "processingTriggerUtc": ["HH:51"],
+    "processingTriggerUtc": ["HH:45"],
     "publicationBoundaryUtc": ["HH:00"],
-    "description": "Process at :51 after the ownership window closes; publish validated languages at the next :00",
-    "processingBudgetMinutes": 9
+    "description": "Process at :45 when the ownership window closes; Megaphone create only at/after the next :00",
+    "processingBudgetMinutes": 15
   },
   "editions": [
     {

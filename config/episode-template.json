@@ -10,7 +10,27 @@
   },
   "introTemplate": {
     "baseTextKey": "welcome",
-    "dynamicSuffix": "It's {time} in {city} on the {day} of {month} {year}. I'm {anchorName} and here are our latest stories for the {editionName}."
+    "dynamicSuffix": "It's {time} in {city} on the {day} of {month} {year}. I'm {anchorName} and here are our latest stories for the {editionName}.",
+    "dynamicSuffixBySlug": {
+      "en": "It's {time} in {city} on the {day} of {month} {year}. I'm {anchorName} and here are our latest stories for the {editionName}.",
+      "es": "Son las {time} en {city}, {day} de {month} de {year}. Soy {anchorName} y estas son las últimas historias para la {editionName}.",
+      "pt": "São {time} em {city}, {day} de {month} de {year}. Eu sou {anchorName} e estas são as nossas últimas histórias para a {editionName}.",
+      "fr": "Il est {time} à {city}, le {day} {month} {year}. Je suis {anchorName} et voici nos dernières actualités pour l'{editionName}.",
+      "de": "Es ist {time} in {city} am {day}. {month} {year}. Ich bin {anchorName} und hier sind unsere neuesten Geschichten für die {editionName}.",
+      "ar": "الساعة {time} في {city} بتاريخ {day} {month} {year}. أنا {anchorName} وإليكم أحدث قصصنا لـ {editionName}.",
+      "ru": "Сейчас {time} в городе {city}, {day} {month} {year}. Я {anchorName}, и вот наши последние истории для издания «{editionName}».",
+      "tr": "{city} saatiyle {time}, {day} {month} {year}. Ben {anchorName} ve {editionName} için son haberlerimiz bunlar."
+    },
+    "monthNamesBySlug": {
+      "en": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+      "es": ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
+      "pt": ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"],
+      "fr": ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"],
+      "de": ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
+      "ar": ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"],
+      "ru": ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"],
+      "tr": ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"]
+    }
   },
   "segmentOrder": [
     { "id": 1, "type": "intro", "durationSec": 15, "source": "reusable_plus_dynamic_tts" },

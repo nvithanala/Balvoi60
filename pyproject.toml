@@ -53,6 +53,7 @@ exclude = [
     ".venv",
     "storage",
     "venv",
+    "_archived",
 ]
 
 [tool.ruff.lint]

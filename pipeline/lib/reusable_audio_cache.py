@@ -11,6 +11,7 @@ from typing import Any
 
 from balvoi.paths import storage_root
 from pipeline.lib.elevenlabs_client import DEFAULT_VOICE_SETTINGS, MODEL_ID
+from pipeline.lib.storage_paths import get_storage_paths
 
 # Sheets whose TTS variants are eligible for reusable caching.
 REUSABLE_SHEETS = ("welcome", "started", "right_back", "welcome_back", "thank_you")
@@ -34,6 +35,9 @@ def build_cache_payload(
 ) -> dict[str, Any]:
     """Build the canonical identity for a cached reusable clip."""
     vid = variant_id if isinstance(variant_id, str) else f"{int(variant_id):02d}"
+    cleaned = str(text)
+    # text_hash is derived for sidecar/validation logs; it is not part of the cache key
+    # so existing valid reusable clips remain hits when identity fields match.
     return {
         "edition_id": edition_id,
         "language": language,
@@ -41,10 +45,14 @@ def build_cache_payload(
         "voice_id": voice_id,
         "segment_type": segment_type,
         "variant_id": vid,
-        "text": text,
+        "text": cleaned,
         "model_id": model_id or MODEL_ID,
         "voice_settings": voice_settings or dict(DEFAULT_VOICE_SETTINGS),
     }
+
+
+def payload_text_hash(payload: dict[str, Any]) -> str:
+    return hashlib.sha256(str(payload.get("text") or "").encode("utf-8")).hexdigest()
 
 
 def compute_cache_key(payload: dict[str, Any]) -> str:
@@ -58,7 +66,7 @@ def anchor_slug(name: str) -> str:
 
 
 def reusable_root(root: Path | None = None, *, create: bool = True) -> Path:
-    path = Path(root) if root is not None else storage_root() / "audio_assets" / "reusable"
+    path = Path(root) if root is not None else get_storage_paths().reusable_audio_root
     if create:
         path.mkdir(parents=True, exist_ok=True)
     return path
@@ -120,6 +128,29 @@ def is_valid_hit(mp3_path: Path, sidecar_path: Path, expected_key: str) -> bool:
     return meta.get("cache_key") == expected_key
 
 
+def metadata_matches_payload(meta: dict[str, Any], payload: dict[str, Any]) -> bool:
+    """Require identity fields to match before trusting a reusable clip."""
+    for key in (
+        "edition_id",
+        "language",
+        "anchor_name",
+        "voice_id",
+        "segment_type",
+        "variant_id",
+    ):
+        if str(meta.get(key) or "") != str(payload.get(key) or ""):
+            return False
+    requested_hash = payload_text_hash(payload)
+    stored_hash = str(meta.get("text_hash") or "") or hashlib.sha256(
+        str(meta.get("text") or "").encode("utf-8")
+    ).hexdigest()
+    if stored_hash != requested_hash:
+        return False
+    if meta.get("cache_key") != compute_cache_key(payload):
+        return False
+    return True
+
+
 def lookup(
     payload: dict[str, Any],
     *,
@@ -133,9 +164,24 @@ def lookup(
     search_roots: list[Path | None] = roots if roots is not None else [None]
     for root in search_roots:
         mp3_path, sidecar_path = cache_paths(payload, key, root=root, create=False)
-        if is_valid_hit(mp3_path, sidecar_path, key):
-            return mp3_path
+        if not is_valid_hit(mp3_path, sidecar_path, key):
+            continue
+        try:
+            meta = json.loads(sidecar_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        if not metadata_matches_payload(meta, payload):
+            continue
+        return mp3_path
     return None
+
+
+def read_sidecar_metadata(sidecar_path: Path) -> dict[str, Any]:
+    try:
+        data = json.loads(sidecar_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    return data if isinstance(data, dict) else {}
 
 
 def write_sidecar(payload: dict[str, Any], *, root: Path | None = None) -> Path:
@@ -149,6 +195,7 @@ def write_sidecar(payload: dict[str, Any], *, root: Path | None = None) -> Path:
     sidecar = {
         "cache_key": key,
         **payload,
+        "text_hash": payload_text_hash(payload),
         "file": relative,
     }
     write_atomic_json(sidecar_path, sidecar)

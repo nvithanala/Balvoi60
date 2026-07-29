@@ -7,11 +7,14 @@ import os
 from datetime import UTC, datetime
 from pathlib import Path
 
-from balvoi.paths import storage_root
 from pipeline.lib.balvoi_api import fetch_podcast_articles
+from pipeline.lib.storage_paths import get_storage_paths
 
 SITE_URL = os.environ.get("BALVOI_SITE_URL", "https://staging.balvoi.com")
-ARTICLES_CACHE = storage_root() / "articles" / "latest.json"
+
+
+def _articles_cache_path() -> Path:
+    return get_storage_paths().articles_cache_path
 
 
 def _demo_allowed() -> bool:
@@ -90,7 +93,7 @@ def _demo_articles() -> list[dict]:
             "title": title,
             "url": f"{SITE_URL}/story/fallback-{i}",
             "fullText": body,
-            "summary": body[:200],
+            "summary": body,
             "publishDate": now,
             "publishTimestamp": datetime.now(UTC).timestamp(),
             "breaking": breaking,
@@ -107,9 +110,15 @@ def fetch_articles(
     window_start: datetime | None = None,
     window_end_exclusive: datetime | None = None,
     *,
-    cache_path: os.PathLike[str] | str | None = ARTICLES_CACHE,
+    cache_path: os.PathLike[str] | str | None = None,
+    write_default_cache: bool = True,
 ) -> list[dict]:
-    """Return normalized articles from NewsGenie podcast_articles API."""
+    """Return normalized articles from NewsGenie podcast_articles API.
+
+    When ``cache_path`` is provided, write there. When omitted and
+    ``write_default_cache`` is true, write to ``articles/latest.json``.
+    Pass ``write_default_cache=False`` (and no ``cache_path``) to skip writing.
+    """
     articles = fetch_podcast_articles(window_start, window_end_exclusive)
     if not articles and _demo_allowed():
         print("  [info] API empty — using demo articles (BALVOI_ALLOW_DEMO_ARTICLES=true)")
@@ -123,10 +132,16 @@ def fetch_articles(
         seen.add(a["id"])
         unique.append(a)
 
+    resolved: Path | None
     if cache_path is not None:
-        resolved_cache = Path(cache_path)
-        resolved_cache.parent.mkdir(parents=True, exist_ok=True)
-        resolved_cache.write_text(
+        resolved = Path(cache_path)
+    elif write_default_cache:
+        resolved = _articles_cache_path()
+    else:
+        resolved = None
+    if resolved is not None:
+        resolved.parent.mkdir(parents=True, exist_ok=True)
+        resolved.write_text(
             json.dumps(unique, indent=2, ensure_ascii=False), encoding="utf-8"
         )
     print(f"  [fetch] {len(unique)} articles available")

@@ -8,9 +8,9 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from balvoi.dates import format_iso_utc, parse_iso_datetime
-from balvoi.paths import storage_root
 from pipeline.errors import PublishRejectedError
 from pipeline.lib.edition_lock import edition_was_published
+from pipeline.lib.storage_paths import get_storage_paths
 from pipeline.stages.merge_audio import validate_publishable_audio
 
 
@@ -63,10 +63,14 @@ def publish_run(
     except Exception as err:
         raise PublishRejectedError(f"Publication rejected: {err}") from err
     if edition_was_published(boundary, slug):
-        raise PublishRejectedError("Publication rejected: already_published")
+        raise PublishRejectedError(
+            "Publication rejected: already_published",
+            reason="already_published",
+        )
 
     rel_audio = f"/episodes/{run_id}/{slug}.mp3"
-    dest = storage_root() / "episodes" / run_id / f"{slug}.mp3"
+    paths = get_storage_paths()
+    dest = paths.episode_mp3(run_id, slug)
     dest.parent.mkdir(parents=True, exist_ok=True)
     if audio_path.resolve() != dest.resolve():
         tmp_audio = dest.with_suffix(".mp3.tmp")
@@ -80,7 +84,7 @@ def publish_run(
         "runId": run_id,
         "publicationBoundary": format_iso_utc(boundary),
         "editionId": edition["id"],
-        "slug": slug,
+        "slug": edition["slug"],
         "name": edition["name"],
         "editionName": edition["editionName"],
         "city": edition["city"],
@@ -95,20 +99,18 @@ def publish_run(
         "budget": budget,
     }
 
-    root = storage_root()
-    runs_dir = root / "manifests" / "runs"
-    runs_dir.mkdir(parents=True, exist_ok=True)
-    run_path = runs_dir / f"{run_id}-{slug}.json"
+    run_path = paths.published_episode_manifest(run_id, slug)
+    run_path.parent.mkdir(parents=True, exist_ok=True)
 
-    latest_path = root / "manifests" / "latest.json"
+    latest_path = paths.latest_path
     latest: dict = _read_json(latest_path, {})
     latest[slug] = episode
 
-    history_path = root / "manifests" / "history.json"
+    history_path = paths.history_path
     history: list = _read_json(history_path, [])
     history = [episode] + [h for h in history if h.get("id") != episode["id"]]
 
-    status_path = root / "manifests" / "status.json"
+    status_path = paths.status_aggregate_path
     status = {"lastRunId": run_id, "lastSuccess": datetime.now(UTC).isoformat()}
     updates = [
         (latest_path, latest),

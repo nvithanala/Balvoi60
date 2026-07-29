@@ -67,8 +67,8 @@ def test_select_stories_has_no_runtime_cap(patch_select_now, fixed_now) -> None:
 def test_select_stories_uses_half_open_ownership_window(fixed_now) -> None:
     from datetime import timedelta
 
-    start = fixed_now - timedelta(hours=2, minutes=9)
-    end = fixed_now - timedelta(hours=1, minutes=9)
+    start = fixed_now - timedelta(hours=2, minutes=15)
+    end = fixed_now - timedelta(hours=1, minutes=15)
     articles = [
         article("at-start", fixed_now=start),
         article("before-end", fixed_now=end - timedelta(milliseconds=1)),

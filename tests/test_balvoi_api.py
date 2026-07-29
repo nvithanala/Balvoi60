@@ -109,6 +109,21 @@ def test_normalize_podcast_article_maps_fields() -> None:
     assert article["source"] == "BalVoi"
 
 
+def test_normalize_preserves_long_summary_without_truncation() -> None:
+    long_summary = ("Word " * 200).strip()
+    assert len(long_summary) > 500
+    raw = {
+        "_id": "long-sum-1",
+        "title": "Long summary story",
+        "body": "",
+        "createdAt": "2026-06-16T23:29:48Z",
+        "summary": long_summary,
+        "slug": "long-summary-story",
+    }
+    article = normalize_podcast_article(raw, "https://staging.balvoi.com")
+    assert article["summary"] == long_summary
+
+
 @patch("pipeline.lib.balvoi_api.requests.get")
 def test_fetch_podcast_articles_parses_response(mock_get: MagicMock) -> None:
     mock_get.return_value.ok = True
@@ -138,6 +153,7 @@ def test_fetch_podcast_articles_parses_response(mock_get: MagicMock) -> None:
         {
             "BALVOI_API_KEY": "test-key",
             "BALVOI_API_URL": "https://api.example.test",
+            "BALVOI_API_ARTICLES_PATH": "/podcast_articles",
             "BALVOI_SINCE_OVERRIDE": "2026-06-16T10:00:00Z",
             "BALVOI_ARTICLE_LIMIT": "50",
         },
@@ -154,6 +170,49 @@ def test_fetch_podcast_articles_parses_response(mock_get: MagicMock) -> None:
     assert call_kwargs[1]["params"]["limit"] == 50
     assert call_kwargs[1]["params"]["since"] == "2026-06-16T10:00:00Z"
     assert "edition" not in call_kwargs[1]["params"]
+
+
+@patch("pipeline.lib.balvoi_api.requests.get")
+def test_fetch_respects_custom_articles_path(mock_get: MagicMock) -> None:
+    mock_get.return_value.ok = True
+    mock_get.return_value.json.return_value = {
+        "status": True,
+        "data": {"articles": []},
+        "message": "ok",
+    }
+    with patch.dict(
+        "os.environ",
+        {
+            "BALVOI_API_KEY": "test-key",
+            "BALVOI_API_URL": "https://api.example.test",
+            "BALVOI_API_ARTICLES_PATH": "/api/v2/articles",
+        },
+        clear=False,
+    ):
+        fetch_podcast_articles()
+    assert mock_get.call_args[0][0] == "https://api.example.test/api/v2/articles"
+
+
+@patch("pipeline.lib.balvoi_api.requests.get")
+def test_fetch_accepts_full_url_in_articles_path(mock_get: MagicMock) -> None:
+    """Pasting a full URL into BALVOI_API_ARTICLES_PATH must not double the host."""
+    mock_get.return_value.ok = True
+    mock_get.return_value.json.return_value = {
+        "status": True,
+        "data": {"articles": []},
+        "message": "ok",
+    }
+    with patch.dict(
+        "os.environ",
+        {
+            "BALVOI_API_KEY": "test-key",
+            "BALVOI_API_URL": "https://api.example.test",
+            "BALVOI_API_ARTICLES_PATH": "https://api.example.test/podcast_articles",
+        },
+        clear=False,
+    ):
+        fetch_podcast_articles()
+    assert mock_get.call_args[0][0] == "https://api.example.test/podcast_articles"
 
 
 @patch("pipeline.lib.balvoi_api.requests.get")

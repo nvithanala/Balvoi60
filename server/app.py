@@ -4,12 +4,12 @@ from __future__ import annotations
 
 import os
 
-from dotenv import load_dotenv
-
 from balvoi.dates import format_display_datetime
 from balvoi.paths import ROOT
+from pipeline.lib.settings import load_app_dotenv
 
-load_dotenv(ROOT / ".env", override=False)
+# Process environment wins over ``.env`` (same policy as ``pipeline.run``).
+load_app_dotenv(ROOT / ".env")
 
 from flask import (
     Flask,

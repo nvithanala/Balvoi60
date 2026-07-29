@@ -6,7 +6,7 @@ import json
 from datetime import UTC, datetime
 
 from balvoi.dates import parse_iso_timestamp
-from balvoi.paths import storage_root
+from pipeline.lib.storage_paths import get_storage_paths
 
 
 def recently_used_story_ids(cooldown_minutes: int) -> set[str]:
@@ -19,7 +19,7 @@ def recently_used_story_ids(cooldown_minutes: int) -> set[str]:
     if cooldown_minutes <= 0:
         return set()
 
-    runs_dir = storage_root() / "manifests" / "runs"
+    runs_dir = get_storage_paths().manifests_root / "runs"
     if not runs_dir.exists():
         return set()
 

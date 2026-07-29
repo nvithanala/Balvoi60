@@ -7,11 +7,11 @@ import os
 from datetime import UTC, datetime
 from pathlib import Path
 
-from balvoi.paths import storage_root
+from pipeline.lib.storage_paths import get_storage_paths
 
 
 def _path(run_id: str, slug: str) -> Path:
-    return storage_root() / "manifests" / "status" / f"{run_id}-{slug}.json"
+    return get_storage_paths().edition_status_path(run_id, slug)
 
 
 def _atomic_json(path: Path, payload: dict) -> None:
@@ -34,6 +34,10 @@ def record_status(
     duration: int | None = None,
     elapsed_seconds: float | None = None,
     metrics: dict | None = None,
+    megaphone_episode_id: str | None = None,
+    published_at: str | None = None,
+    publication_delay_seconds: float | None = None,
+    public_audio_url: str | None = None,
 ) -> None:
     path = _path(run_id, slug)
     existing: dict = {}
@@ -45,6 +49,8 @@ def record_status(
     event = {"stage": stage, "timestamp": now}
     if elapsed_seconds is not None:
         event["elapsedSeconds"] = round(elapsed_seconds, 3)
+    if publication_delay_seconds is not None:
+        event["publicationDelaySeconds"] = round(float(publication_delay_seconds), 3)
     events = [*(existing.get("events") or []), event]
     payload = {
         "runId": run_id,
@@ -65,4 +71,20 @@ def record_status(
         payload["durationSeconds"] = duration
     if metrics:
         payload["metrics"] = metrics
+    if megaphone_episode_id:
+        payload["megaphoneEpisodeId"] = megaphone_episode_id
+    elif existing.get("megaphoneEpisodeId"):
+        payload["megaphoneEpisodeId"] = existing["megaphoneEpisodeId"]
+    if published_at:
+        payload["publishedAt"] = published_at
+    elif existing.get("publishedAt"):
+        payload["publishedAt"] = existing["publishedAt"]
+    if publication_delay_seconds is not None:
+        payload["publicationDelaySeconds"] = round(float(publication_delay_seconds), 3)
+    elif existing.get("publicationDelaySeconds") is not None:
+        payload["publicationDelaySeconds"] = existing["publicationDelaySeconds"]
+    if public_audio_url:
+        payload["publicAudioUrl"] = public_audio_url
+    elif existing.get("publicAudioUrl"):
+        payload["publicAudioUrl"] = existing["publicAudioUrl"]
     _atomic_json(path, payload)

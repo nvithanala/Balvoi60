@@ -10,25 +10,28 @@ from dataclasses import dataclass
 from datetime import datetime
 
 from balvoi.dates import format_iso_utc, parse_iso_datetime
-from balvoi.paths import storage_root
 from pipeline.errors import DuplicateEditionError
+from pipeline.lib.publication_identity import boundary_key
+from pipeline.lib.storage_paths import get_storage_paths
 
 
-def boundary_key(boundary: datetime) -> str:
-    return format_iso_utc(boundary).replace(":", "-")
+def _min_publish_duration_seconds() -> int:
+    """Same env default as ``merge_audio.validate_publishable_audio``."""
+    return int(os.environ.get("MIN_PUBLISH_DURATION_SECONDS", "600"))
 
 
 def edition_was_published(boundary: datetime, slug: str) -> bool:
     expected = format_iso_utc(boundary)
-    history_path = storage_root() / "manifests" / "history.json"
+    history_path = get_storage_paths().history_path
     try:
         history = json.loads(history_path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         return False
+    minimum = _min_publish_duration_seconds()
     return any(
         row.get("slug") == slug
         and row.get("publicationBoundary") == expected
-        and row.get("durationSeconds", 0) >= 600
+        and row.get("durationSeconds", 0) >= minimum
         for row in history
     )
 
@@ -41,7 +44,7 @@ class EditionLock:
 
     def __post_init__(self) -> None:
         key = boundary_key(self.boundary)
-        self.path = storage_root() / "locks" / f"{key}-{self.slug}.lock"
+        self.path = get_storage_paths().lock_path(key, self.slug)
         self.token = uuid.uuid4().hex
         self.acquired = False
 

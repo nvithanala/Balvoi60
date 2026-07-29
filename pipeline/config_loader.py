@@ -58,8 +58,14 @@ def get_voice_for_edition(edition: dict, when: datetime | None = None) -> dict:
         else:
             in_shift = minutes >= start or minutes <= end
         if in_shift:
-            return shift["primary"]
-    return edition["voiceShifts"][0]["primary"]
+            primary = dict(shift["primary"])
+            primary["shift"] = f"{shift['start']}-{shift['end']}"
+            return primary
+    primary = dict(edition["voiceShifts"][0]["primary"])
+    primary["shift"] = (
+        f"{edition['voiceShifts'][0]['start']}-{edition['voiceShifts'][0]['end']}"
+    )
+    return primary
 
 
 def ensure_storage() -> None:

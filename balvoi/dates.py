@@ -8,7 +8,9 @@ from datetime import UTC, datetime, timedelta
 from email.utils import format_datetime
 from typing import Any
 
-PROCESSING_TRIGGER_MINUTE = 51
+# Processing starts when the article ownership window closes (:45).
+# Publication boundary remains the next hour's :00.
+PROCESSING_TRIGGER_MINUTE = 45
 
 
 def parse_iso_datetime(value: str | None) -> datetime | None:
@@ -69,9 +71,10 @@ def format_iso_utc(dt: datetime) -> str:
 def publication_boundary(now: datetime | None = None) -> datetime:
     """Return the UTC publication boundary for a processing or manual run.
 
-    Processing begins at minute ``:51``. A run at ``10:51`` publishes for
-    ``11:00``. Times before ``:51`` still resolve to the current hour's
-    ``:00`` boundary (useful for retries after publication opens).
+    Processing begins at minute ``:45`` (ownership window close). A run at
+    ``18:45`` publishes for ``19:00``. Times before ``:45`` still resolve to
+    the current hour's ``:00`` boundary (useful for retries after publication
+    opens).
     """
     current = (now or datetime.now(UTC)).astimezone(UTC)
     hour_start = current.replace(minute=0, second=0, microsecond=0)
@@ -83,9 +86,9 @@ def publication_boundary(now: datetime | None = None) -> datetime:
 def latest_completed_publication_boundary(now: datetime | None = None) -> datetime:
     """Return the newest publication boundary whose article window has closed.
 
-    The ownership window for boundary ``HH:00`` ends at ``(HH-1):51``. Once
-    that minute is reached, preview and catch-up runs may use that boundary
-    without waiting for the next scheduler tick.
+    The ownership window for boundary ``HH:00`` ends at ``(HH-1):45``. Once
+    that minute is reached, processing and catch-up runs may use that boundary
+    (resolver currently matches ``publication_boundary``).
     """
     return publication_boundary(now)
 
@@ -94,7 +97,7 @@ def previous_podcast_boundary(now: datetime | None = None) -> datetime:
     """Return the latest publication boundary strictly before ``now`` (UTC).
 
     Publication boundaries are always at ``:00``. This is independent of the
-    ``:51`` processing trigger (used for API ``since`` fallbacks).
+    ``:45`` processing trigger (used for API ``since`` fallbacks).
     """
     current = (now or datetime.now(UTC)).astimezone(UTC)
     hour_start = current.replace(minute=0, second=0, microsecond=0)
@@ -109,7 +112,11 @@ def wait_until_publication_boundary(
     now: datetime | None = None,
     sleep: Callable[[float], None] | None = None,
 ) -> None:
-    """Block until the publication boundary so validated editions publish on time."""
+    """Block until the publication boundary when ready early; no-op when late.
+
+    Early editions sleep until ``:00``. Late editions return immediately so
+    Megaphone create can proceed and record a positive publication delay.
+    """
     sleeper = sleep or time_module.sleep
     target = boundary.astimezone(UTC)
     current = (now or datetime.now(UTC)).astimezone(UTC)
@@ -118,13 +125,45 @@ def wait_until_publication_boundary(
         sleeper(remaining)
 
 
+def publication_delay_seconds(
+    boundary: datetime,
+    *,
+    success_at: datetime | None = None,
+) -> float:
+    """Megaphone create success UTC minus publication boundary UTC."""
+    success = (success_at or datetime.now(UTC)).astimezone(UTC)
+    return (success - boundary.astimezone(UTC)).total_seconds()
+
+
 def article_ownership_window(boundary: datetime) -> tuple[datetime, datetime]:
     """Return the gap-free ownership interval for an hourly publication.
 
-    A boundary at 11:00 UTC owns ``[09:51, 10:51)``. The next boundary owns
-    ``[10:51, 11:51)``, so adjacent windows neither overlap nor leave gaps.
-    The article-window formula is fixed and independent of when processing starts.
+    Derived only from the UTC publication boundary (top of the hour), never from
+    wall-clock processing time. Window length is exactly 60 minutes and ends
+    15 minutes before publication:
+
+    - ``window_end`` = ``boundary − 15 minutes`` (exclusive)
+    - ``window_start`` = ``window_end − 60 minutes`` (inclusive)
+
+    Example: boundary ``19:00`` UTC owns ``[17:45, 18:45)``. The next boundary
+    ``20:00`` owns ``[18:45, 19:45)``, so adjacent windows neither overlap nor
+    leave gaps. An article at exactly ``18:45`` belongs only to the ``20:00``
+    edition.
     """
     boundary_utc = boundary.astimezone(UTC).replace(second=0, microsecond=0)
-    end_exclusive = boundary_utc - timedelta(minutes=9)
-    return end_exclusive - timedelta(hours=1), end_exclusive
+    end_exclusive = boundary_utc - timedelta(minutes=15)
+    return end_exclusive - timedelta(minutes=60), end_exclusive
+
+
+def article_lookback_window(
+    boundary: datetime, *, hours: int = 2
+) -> tuple[datetime, datetime]:
+    """Return a wider lookback ending at the same ownership close.
+
+    Used only when the traditional one-hour ownership window returns no articles.
+    Example: boundary 19:00 → ownership end 18:45 → 2h lookback ``[16:45, 18:45)``.
+    """
+    if hours < 1:
+        raise ValueError("hours must be >= 1")
+    _hourly_start, end_exclusive = article_ownership_window(boundary)
+    return end_exclusive - timedelta(hours=hours), end_exclusive

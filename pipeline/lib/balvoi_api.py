@@ -17,7 +17,34 @@ from balvoi.dates import (
 )
 
 DEFAULT_API_BASE = "https://api.staging.newsgenie.ai"
+DEFAULT_ARTICLES_PATH = "/podcast_articles"
 DEFAULT_ARTICLE_LIMIT = 200
+
+
+def articles_api_path() -> str:
+    """Return configured articles path (always absolute under the API base).
+
+    Accepts either a path (``/podcast_articles``) or a full URL; full URLs are
+    reduced to their path so they are not concatenated onto ``BALVOI_API_URL``.
+    """
+    raw = (os.environ.get("BALVOI_API_ARTICLES_PATH") or DEFAULT_ARTICLES_PATH).strip()
+    if not raw:
+        raw = DEFAULT_ARTICLES_PATH
+    # Operators sometimes paste the full endpoint URL into this env var.
+    if "://" in raw:
+        from urllib.parse import urlparse
+
+        parsed = urlparse(raw)
+        raw = parsed.path or DEFAULT_ARTICLES_PATH
+    if not raw.startswith("/"):
+        raw = f"/{raw}"
+    return raw.rstrip("/") or DEFAULT_ARTICLES_PATH
+
+
+def articles_api_url(api_base: str | None = None) -> str:
+    """Build the full podcast-articles endpoint URL."""
+    base = (api_base or os.environ.get("BALVOI_API_URL") or DEFAULT_API_BASE).rstrip("/")
+    return f"{base}{articles_api_path()}"
 
 # Model-leakage signatures anchored at paragraph/sentence start (case-insensitive).
 # Only first-person meta-text about rewriting/debiasing — not incidental news vocabulary.
@@ -117,7 +144,8 @@ def normalize_podcast_article(raw: dict, site_url: str) -> dict:
         "id": article_id or slug,
         "slug": slug,
         "title": title,
-        "summary": str(raw.get("summary") or "")[:500],
+        # Keep full summary — it is the spoken-body fallback when fullText is empty.
+        "summary": str(raw.get("summary") or ""),
         "country": str(raw.get("countryName") or ""),
         "category": category,
         "tags": tags,
@@ -165,18 +193,18 @@ def fetch_podcast_articles(
     limit = int(os.environ.get("BALVOI_ARTICLE_LIMIT", str(DEFAULT_ARTICLE_LIMIT)))
     since = format_iso_utc(window_start) if window_start else _resolve_since()
 
-    url = f"{api_base}/podcast_articles"
+    url = articles_api_url(api_base)
     headers = {"X-Api-Token": key, "Accept": "application/json"}
     params = {"limit": limit, "since": since}
 
     try:
         res = requests.get(url, headers=headers, params=params, timeout=45)
     except requests.RequestException as err:
-        print(f"  [warn] podcast_articles request failed: {err}")
+        print(f"  [warn] podcast_articles request failed ({url}): {err}")
         return []
 
     if not res.ok:
-        print(f"  [warn] podcast_articles HTTP {res.status_code}")
+        print(f"  [warn] podcast_articles HTTP {res.status_code} ({url})")
         return []
 
     try:

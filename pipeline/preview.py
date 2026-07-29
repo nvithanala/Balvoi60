@@ -19,6 +19,13 @@ from balvoi.paths import storage_root
 from pipeline.config_loader import edition_by_slug
 from pipeline.errors import AudioValidationError, LocalizationError, MergeError
 from pipeline.lib import concurrency, elevenlabs_client, openai_client
+from pipeline.lib.edition_voice_validation import (
+    EditionRunTracker,
+    log_edition_end,
+    log_edition_start,
+    validate_live_tts_segments,
+)
+from pipeline.lib.storage_paths import get_storage_paths
 from pipeline.lib.story_history import recently_used_story_ids
 from pipeline.stages.assemble_episode import assemble_episode
 from pipeline.stages.fetch_articles import fetch_articles
@@ -199,9 +206,12 @@ def _language_result(
     boundary: datetime,
     manifest_hash: str,
     minimum_seconds: int,
+    tracker: EditionRunTracker | None = None,
 ) -> dict:
     slug = edition["slug"]
     language = LANGUAGE_FILENAMES[slug]
+    if tracker is not None:
+        tracker.mark_start(slug)
     started = time.monotonic()
     stage = "translation"
     timings = {
@@ -227,6 +237,8 @@ def _language_result(
         "publicationStatus": "PREVIEW — NOT PUBLISHED",
         "error": None,
         "timing": timings,
+        "cacheHits": 0,
+        "segmentLanguages": [],
     }
     try:
         stage_started = time.monotonic()
@@ -237,7 +249,7 @@ def _language_result(
         result["translationCompleted"] = True
 
         stage_started = time.monotonic()
-        headlines = headlines_segment(stories)
+        headlines = headlines_segment(stories, language=edition["language"])
         episode_manifest = assemble_episode(
             edition,
             stories,
@@ -247,14 +259,31 @@ def _language_result(
         )
         timings["assemblySeconds"] = round(time.monotonic() - stage_started, 3)
         stage = "synthesis"
+        voice = episode_manifest["voice"]
+        log_edition_start(
+            edition_id=edition["id"],
+            language=edition["language"],
+            anchor_name=str(voice.get("name") or ""),
+            voice_id=str(voice.get("voiceId") or ""),
+            timezone=str(edition.get("timezone") or ""),
+            shift=str(voice.get("shift") or ""),
+        )
         result["voice"] = {
-            "name": episode_manifest["voice"].get("name"),
-            "voiceId": episode_manifest["voice"].get("voiceId"),
+            "name": voice.get("name"),
+            "voiceId": voice.get("voiceId"),
             "configuredLanguageCode": slug,
             "locale": edition.get("locale"),
             "elevenLabsModel": elevenlabs_client.MODEL_ID,
             "selectedForBoundary": format_iso_utc(boundary),
+            "shift": voice.get("shift"),
         }
+        validation_errors = validate_live_tts_segments(
+            edition=edition,
+            manifest=episode_manifest,
+            language=edition["language"],
+        )
+        if validation_errors:
+            raise AudioValidationError("; ".join(validation_errors))
         story_order_matches = episode_manifest["storyIds"] == [story["id"] for story in english]
         translated_without_fallback = is_english(edition["language"]) or all(
             str(localized.get("broadcastScript") or "").strip()
@@ -267,22 +296,35 @@ def _language_result(
             and "intro_dynamic" in segment_types
             and "outro" in segment_types
         )
+        result["segmentLanguages"] = sorted(
+            {
+                edition["language"]
+                for segment in episode_manifest["segments"]
+                if segment.get("type") == "tts" and str(segment.get("text") or "").strip()
+            }
+        )
 
         script_path = preview_dir / "scripts" / f"{language}.txt"
         script_path.write_text(_script_text(episode_manifest), encoding="utf-8")
 
         stage_started = time.monotonic()
         preview_cache = preview_dir / "cache"
-        segment_paths = render_segments(
+        segment_paths, synth_stats = render_segments(
             episode_manifest,
             tts_cache_root=preview_cache / "tts",
             reusable_write_root=preview_cache / "reusable",
             reusable_read_roots=[
                 preview_cache / "reusable",
-                storage_root() / "audio_assets" / "reusable",
+                get_storage_paths().reusable_audio_root,
             ],
+            diagnostics=True,
         )
         timings["synthesisSeconds"] = round(time.monotonic() - stage_started, 3)
+        result["cacheHits"] = synth_stats["cache_hits"]
+        if len(synth_stats["live_tts_voice_ids"]) > 1:
+            raise AudioValidationError(
+                f"Multiple live TTS voice IDs in one edition: {synth_stats['live_tts_voice_ids']}"
+            )
         required_segments_present = (
             len(segment_paths) == len(episode_manifest["segments"])
             and all(path.exists() and path.stat().st_size > 0 for path in segment_paths)
@@ -320,6 +362,11 @@ def _language_result(
             result["status"] = "preview_failed_validation"
             result["error"] = str(err)
         timings["validationSeconds"] = round(time.monotonic() - stage_started, 3)
+        log_edition_end(
+            edition_id=edition["id"],
+            duration_seconds=duration,
+            output_path=str(output),
+        )
 
         title = f"{edition['name']} — {format_iso_utc(boundary)}"
         description = " • ".join(str(story.get("title") or "") for story in stories)
@@ -345,6 +392,8 @@ def _language_result(
                 "allRequiredSegmentsPresent": required_segments_present,
                 "zeroByteSegments": zero_byte_segments,
                 "consecutiveDuplicateSegments": consecutive_duplicates,
+                "liveTtsVoiceIds": synth_stats["live_tts_voice_ids"],
+                "cacheHits": synth_stats["cache_hits"],
             },
         }
         _json_write(preview_dir / "metadata" / f"{language}.json", metadata)
@@ -363,6 +412,8 @@ def _language_result(
         _json_write(preview_dir / "metadata" / f"{language}.json", result)
     finally:
         result["timing"]["totalSeconds"] = round(time.monotonic() - started, 3)
+        if tracker is not None:
+            tracker.mark_complete(slug)
     assert result["status"] in PREVIEW_STATUSES
     return result
 
@@ -441,13 +492,12 @@ def run_preview(
         raise RuntimeError("Preview safety check failed: CRON_ENABLED must be false")
     if os.environ.get("BALVOI_ALLOW_DEMO_ARTICLES", "").strip().lower() == "true":
         raise RuntimeError("Preview safety check failed: demo articles must be disabled")
-    if not os.environ.get("OPENAI_API_KEY", "").strip():
+    if not os.environ.get("BALVOI_API_KEY", "").strip():
         raise RuntimeError(
-            "Preview safety check failed: OPENAI_API_KEY is required for real translations"
+            "Preview safety check failed: BALVOI_API_KEY is required for Bedrock translations"
         )
 
-    root = storage_root()
-    preview_dir = root / "previews" / run_id
+    preview_dir = get_storage_paths().preview(run_id).preview_root
     if preview_dir.exists():
         raise FileExistsError(f"Preview run already exists: {preview_dir}")
     safety_before = production_state()
@@ -513,6 +563,7 @@ def run_preview(
 
     result_lock = threading.Lock()
     results: list[dict] = []
+    tracker = EditionRunTracker(expected_slugs=list(edition_slugs))
 
     def process(slug: str) -> dict:
         result = _language_result(
@@ -523,6 +574,7 @@ def run_preview(
             boundary=boundary,
             manifest_hash=manifest["manifestHash"],
             minimum_seconds=settings["minimum_publish_seconds"],
+            tracker=tracker,
         )
         with result_lock:
             results.append(result)
@@ -537,6 +589,7 @@ def run_preview(
         for future in concurrent.futures.as_completed(futures):
             future.result()
 
+    tracker.assert_unique_completion()
     order = {slug: index for index, slug in enumerate(edition_slugs)}
     results.sort(key=lambda item: order[item["slug"]])
     total_seconds = round(time.monotonic() - total_started, 3)
